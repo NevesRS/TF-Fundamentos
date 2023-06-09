@@ -25,10 +25,10 @@ public class CadastroPaciente {
         this.tamanho = tamanho;
     };
 
-    public int localizarPaciente(String nome) {
+    public int localizarPaciente(String cpf) {
         int selecionado = -1;
         for (int i = 0; i < tamanho; i++) {
-            if (pacientes[i] != null && pacientes[i].getNome() == nome) {
+            if (pacientes[i] != null && pacientes[i].getCpf() == cpf) {
                 selecionado = i;
             }
         }
@@ -67,7 +67,7 @@ public class CadastroPaciente {
                 p2[cont] = p[i];
                 cont++;
             } else {
-                index = cont + 1;
+                index = cont;
             }
         }
         for (int f = 0; f < p.length; f++) {
@@ -90,7 +90,6 @@ public class CadastroPaciente {
             }if(pacientes[i] == null){
                 System.out.println("\nEssa posição não está cadastrada: "+i);
             }
-
         }
 
     }
@@ -98,6 +97,7 @@ public class CadastroPaciente {
     public void imprimeOcupado() {
         for (int i = 0; i < pacientes.length; i++) {
             if (pacientes[i] != null) {
+                System.out.println("\nPosição: "+i);
                 System.out.println("Nome do Paciente:  " + pacientes[i].getNome());
                 System.out.println("O Cpf do paciente é: " + pacientes[i].getCpf());
                 System.out.println("O celulcar do paciente é" + pacientes[i].getTelefone());
