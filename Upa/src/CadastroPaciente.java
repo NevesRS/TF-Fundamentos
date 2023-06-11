@@ -25,14 +25,15 @@ public class CadastroPaciente {
     this.tamanho = tamanho;
   };
 
-  public int localizarPaciente(String cpf) {
-    int selecionado = 0;
-    for (int i = 0; i < tamanho; i++) {
-      if (pacientes[i] != null && pacientes[i].getCpf() == cpf) {
-        selecionado = i;
+  public void localizarPaciente(String cpf) {
+    for (int i = 0; i < pacientes.length; i++) {
+      if (pacientes[i] != null) {
+        if (pacientes[i].getCpf().equals(cpf)) {
+          System.out.println(pacientes[i].getNome() + " foi removido da posição: " + i);
+          pacientes[i] = null;
+        }
       }
     }
-    return selecionado;
   }
 
   public boolean AddPaciente(Paciente c) { // Adiciona pacientes ao Vetor
@@ -52,18 +53,25 @@ public class CadastroPaciente {
     }
   }
 
-  public void removerPaciente(Paciente[] p, int posicao) {
-    if (p[posicao] != null) {
-      p[posicao] = null;
+  public void removerPaciente(Paciente[] p, String cpf) {
+    boolean existe = false;
+    for (int i = 0; i < pacientes.length; i++) {
+      if (pacientes[i] != null) {
+        if (pacientes[i].getCpf().equals(cpf)) {
+          existe = true;
+          System.out.println("----------------------------------------------------------- ");
+          System.out.println("O paciente " + pacientes[i].getNome() + " foi apagado do sistema.");
+          System.out.println("----------------------------------------------------------- ");
+          System.out.println(" ");
+          pacientes[i] = null;
+        }
+      } 
+    }
+    if(existe == false){
       System.out.println("----------------------------------------------------------- ");
-      System.out.println("O paciente da posição " + posicao + " foi apagado do sistema.");
-      System.out.println("----------------------------------------------------------- ");
-      System.out.println(" ");
-    } else {
-      System.out.println("----------------------------------------------------------- ");
-      System.out.println("Não foi encontrado nenhum paciente na posição: " + posicao);
-      System.out.println("----------------------------------------------------------- ");
-      System.out.println(" ");
+          System.out.println("Não existe nenhuma paciente com CPF: "+cpf);
+          System.out.println("----------------------------------------------------------- ");
+          System.out.println(" ");
     }
   }
 

@@ -12,15 +12,15 @@ public class App {
 
         Paciente[] paciente = new Paciente[10];
 
-        // paciente[0] = new Paciente("Bruno1", "601311", "9825252", 1,
-        // medicamento[0].getNomeRemedio(),
-        // medicamento[0].getQuantidadeRemedio());
-        // paciente[1] = new Paciente("Bruno2", "601111", "9825252", 1,
-        // medicamento[0].getNomeRemedio(),
-        // medicamento[0].getQuantidadeRemedio());
+        // paciente[0] = new Paciente("Bruno1", "123", "9825252", 1,
+        //         medicamento[0].getNomeRemedio(),
+        //         medicamento[0].getQuantidadeRemedio());
+        // paciente[1] = new Paciente("Bruno2", "1234", "9825252", 1,
+        //         medicamento[0].getNomeRemedio(),
+        //         medicamento[0].getQuantidadeRemedio());
         // paciente[4] = new Paciente("Bruno3", "601111", "9825252", 1,
-        // medicamento[0].getNomeRemedio(),
-        // medicamento[0].getQuantidadeRemedio());
+        //         medicamento[0].getNomeRemedio(),
+        //         medicamento[0].getQuantidadeRemedio());
         // paciente[5] = new Paciente("Bruno4", "601111", "9825252", 1,
         // medicamento[0].getNomeRemedio(),
         // medicamento[0].getQuantidadeRemedio());
@@ -60,24 +60,31 @@ public class App {
                     System.out.println("4 - Dengue ");
                     int diag = key.nextInt();
                     System.out.println("Escolha o remédio que foi receitado para o paciente: ");
-                    System.out.println("1 - CovidUltra ");
-                    System.out.println("2 - Zicox ");
-                    System.out.println("3 - ChikTop ");
-                    System.out.println("4 - Denguenit ");
+                    System.out.println("1 - CovidUltra (" + medicamento[0].getQuantidadeRemedio() + " em estoque)");
+                    System.out.println("2 - Zicox (" + medicamento[1].getQuantidadeRemedio() + " em estoque)");
+                    System.out.println("3 - ChikTop (" + medicamento[2].getQuantidadeRemedio() + " em estoque)");
+                    System.out.println("4 - Denguenit (" + medicamento[3].getQuantidadeRemedio() + " em estoque)");
                     int remed = key.nextInt();
-                    System.out.println("Digite a quantidade de remédio receitada para o paciente: ");
-                    int quant = key.nextInt();
-                    medicamento[remed - 1].setQuantidadeRemedio(medicamento[remed - 1].getQuantidadeRemedio() - quant);
-                    Paciente completarPaciente = new Paciente(nome, cpf, tel, diag,
-                            medicamento[remed - 1].getNomeRemedio(), quant);
-                    cadastro.AddPaciente(completarPaciente);
+                    int quant = 0;
+                    do {
+                        System.out.println("Digite a quantidade de remédio receitada para o paciente: ");
+                        quant = key.nextInt();
+                        if (quant < medicamento[remed - 1].getQuantidadeRemedio()) {
+                            medicamento[remed - 1]
+                                    .setQuantidadeRemedio(medicamento[remed - 1].getQuantidadeRemedio() - quant);
+                            Paciente completarPaciente = new Paciente(nome, cpf, tel, diag,
+                                    medicamento[remed - 1].getNomeRemedio(), quant);
+                            cadastro.AddPaciente(completarPaciente);
+                        } else {
+                            System.out.println("Quantidade indisponível no estoque!");
+                        }
+                    } while (quant > medicamento[remed - 1].getQuantidadeRemedio());
                     break;
                 case 2: // removerPac paciente
-                    System.out.println("Digite o cpf do paciente que você removerPac: ");
+                    System.out.println("Digite o cpf do paciente que você deseja remover: ");
                     String removerPac = key.nextLine();
                     cadastro.organizarVetor(paciente);
-                    int localPac = cadastro.localizarPaciente(removerPac);
-                    cadastro.removerPaciente(paciente, localPac);
+                    cadastro.removerPaciente(paciente, removerPac);
                     break;
                 case 3: // Menu do sistema de pacientes
                     int menuFichas;
@@ -199,15 +206,5 @@ public class App {
 
             }
         } while (saida <= 0 || saida > 5);
-
-        // TESTES!!!!!!!
-        // Paciente c = new Paciente("Teste", null, null, 0, null, 0);
-        // cadastro.organizarVetor(paciente);
-        // cadastro.AddPaciente(c);
-        // cadastro.imprimeOcupado();
-        // int localPac = cadastro.localizarPaciente(null);
-        // cadastro.removerPaciente(paciente, localPac);
-        // cadastro.imprimeOcupado();
-        // key.close();
     }
 }
