@@ -33,105 +33,119 @@ public class App {
 
         int saida = 0;
         do {
-            System.out.println("  ----------------------------------------------- ");
-            System.out.println("  |   Bem vindo ao sistema da UPA               | ");
-            System.out.println("  |---------------------------------------------| ");
-            System.out.println("  |       Escolha o que deseja fazer:           | ");
-            System.out.println("  |  1 - Adicionar Paciente                     | ");
-            System.out.println("  |  2 - Remover paciente                       | ");
-            System.out.println("  |  3 - Gerenciar a ficha dos pacientes        | ");
-            System.out.println("  |  4 - Gerenciar remédios                     | ");
-            System.out.println("  |  5 - Sair do programa                       | ");
-            System.out.println("  ----------------------------------------------- ");
-            int opcao = key.nextInt();
+            System.out.println("----------------------------------------------- ");
+            System.out.println("|      Seja bem-vindo ao sistema da UPA       | ");
+            System.out.println("| ------------------------------------------- | ");
+            System.out.println("|        Escolha o que deseja fazer:          | ");
+            System.out.println("|  1 - Adicionar novo paciente                | ");
+            System.out.println("|  2 - Remover paciente                       | ");
+            System.out.println("|  3 - Gerenciar a ficha dos pacientes        | ");
+            System.out.println("|  4 - Gerenciar remédios                     | ");
+            System.out.println("|  5 - Sair do programa                       | ");
+            System.out.println("----------------------------------------------- ");
+            int opcaoPrincipal = key.nextInt();
             key.nextLine();
-            switch (opcao) {
+            switch (opcaoPrincipal) {
                 case 1: // Adicionar paciente
                     System.out.println("Digite o nome do paciente que você deseja adicionar: ");
-                    String n = key.nextLine();
+                    String nome = key.nextLine();
                     System.out.println("Digite o cpf do paciente");
-                    String c = key.nextLine();
+                    String cpf = key.nextLine();
                     System.out.println("Digite o celular ");
-                    String t = key.nextLine();
+                    String tel = key.nextLine();
                     System.out.println("Escolha o diagnóstico que o paciente recebeu: ");
                     System.out.println("1 - Covid ");
                     System.out.println("2 - Zica ");
                     System.out.println("3 - Chikungunya ");
                     System.out.println("4 - Dengue ");
-                    int d = key.nextInt();
+                    int diag = key.nextInt();
                     System.out.println("Escolha o remédio que foi receitado para o paciente: ");
                     System.out.println("1 - CovidUltra ");
                     System.out.println("2 - Zicox ");
                     System.out.println("3 - ChikTop ");
                     System.out.println("4 - Denguenit ");
-                    int r = key.nextInt();
+                    int remed = key.nextInt();
                     System.out.println("Digite a quantidade de remédio receitada para o paciente: ");
-                    int q = key.nextInt();
-                    medicamento[r - 1].setQuantidadeRemedio(medicamento[r - 1].getQuantidadeRemedio() - q);
-                    Paciente completarPaciente = new Paciente(n, c, t, d,
-                            medicamento[r - 1].getNomeRemedio(), q);
+                    int quant = key.nextInt();
+                    medicamento[remed - 1].setQuantidadeRemedio(medicamento[remed - 1].getQuantidadeRemedio() - quant);
+                    Paciente completarPaciente = new Paciente(nome, cpf, tel, diag,
+                            medicamento[remed - 1].getNomeRemedio(), quant);
                     cadastro.AddPaciente(completarPaciente);
                     break;
-                case 2: // remover paciente
-                    System.out.println("Digite o cpf do paciente que você remover: ");
-                    String remover = key.nextLine();
-                    int local = cadastro.localizarPaciente(remover);
+                case 2: // removerPac paciente
+                    System.out.println("Digite o cpf do paciente que você removerPac: ");
+                    String removerPac = key.nextLine();
                     cadastro.organizarVetor(paciente);
-                    cadastro.removerPaciente(paciente, local + 1);
+                    int localPac = cadastro.localizarPaciente(removerPac);
+                    cadastro.removerPaciente(paciente, localPac);
                     break;
-                case 3: // Mostrar todos os pacientes
-                    int menuVagas;
+                case 3: // Menu do sistema de pacientes
+                    int menuFichas;
                     do {
-                        System.out.println("--------------------------------------------");
-                        System.out.println("Bem vindo ao sistema de pacientes da UPA");
-                        System.out.println("--------------------------------------------");
-                        System.out.println(" 1 - Mostrar todos os pacientes que estão em atendimento ");
-                        System.out.println(" 2 - Mostrar pacientes e leitos disponiveis      ");
-                        System.out.println(" 3 - Mostrar porcentagem de ocorrência de cada doença");
-                        System.out.println(" 4 - Ordenar todos os pacientes em ordem alfabética: "); // Não feito
-                        menuVagas = key.nextInt();
-                    } while (menuVagas >= 4 || menuVagas <= 0);
-                    switch (menuVagas) {
+                        System.out.println("----------------------------------------------------------- ");
+                        System.out.println("|        Sistema de fichas dos pacientes da UPA           | ");
+                        System.out.println("| ------------------------------------------------------- | ");
+                        System.out.println("| 1 - Mostrar todos os pacientes que estão em atendimento | ");
+                        System.out.println("| 2 - Mostrar pacientes e leitos disponiveis              | ");
+                        System.out.println("| 3 - Mostrar porcentagem de ocorrência de cada doença:   | ");
+                        System.out.println("| 4 - Ordenar todos os pacientes em ordem alfabética:     | "); // NC
+                        System.out.println("----------------------------------------------------------- ");
+                        menuFichas = key.nextInt();
+                    } while (menuFichas >= 4 || menuFichas <= 0);
+                    switch (menuFichas) {
                         case 1:
                             System.out.println("Aqui está a ficha com os pacientes internados:  ");
+                            System.out.println(" ");
                             cadastro.imprimeOcupado();
-                            System.out.println("-----------------------------------");
+                            System.out.println("----------------------------------------------------------- ");
+                            System.out.println(" ");
                             break;
                         case 2:
                             System.out.println("Aqui está a ficha com os pacientes e os leitos ainda disponiveis: ");
+                            System.out.println(" ");
                             cadastro.imprimeTodoVetor();
-                            System.out.println("-----------------------------------");
+                            System.out.println("----------------------------------------------------------- ");
+                            System.out.println(" ");
                             break;
                         case 3:
                             System.out.println("Aqui está o relatório da ocorreência das doenças no hospital: ");
-                            cadastro.contaDoenças();
+                            System.out.println(" ");
+                            cadastro.porcentDoenças();
+                            System.out.println("----------------------------------------------------------- ");
+                            System.out.println(" ");
                             break;
                     }
                     break;
-                case 4: // gerenciar remédios
-                    int remedio;
+                case 4: // Gerenciar remédios
+                    int menuRemedio;
                     do {
-                        System.out.println("  ------------------------------------------------ ");
-                        System.out.println("  |  Bem vindo(a) ao estoque de remédios da UPA  | ");
-                        System.out.println("  ------------------------------------------------ ");
-                        System.out.println("  |  1 - Verificar o estoque de remédios:        | ");
-                        System.out.println("  |  2 - Alterar o estoque:                      | ");
-                        System.out.println("  ------------------------------------------------ ");
-                        remedio = key.nextInt();
-                    } while (remedio <= 0 || remedio > 2);
-                    switch (remedio) {
+                        System.out.println("------------------------------------------------ ");
+                        System.out.println("|  Bem-vindo(a) ao estoque de remédios da UPA  | ");
+                        System.out.println("| -------------------------------------------- | ");
+                        System.out.println("|  1 - Verificar o estoque de remédios:        | ");
+                        System.out.println("|  2 - Alterar o estoque:                      | ");
+                        System.out.println("------------------------------------------------ ");
+                        menuRemedio = key.nextInt();
+                    } while (menuRemedio <= 0 || menuRemedio > 2);
+                    switch (menuRemedio) {
                         case 1: // Mostrar todo o estoque
                             System.out.println(
-                                    "O estoque de CovidUltra possui: " + medicamento[0].getQuantidadeRemedio());
-                            System.out.println("O estoque de Zicox possui: " + medicamento[1].getQuantidadeRemedio());
-                            System.out.println("O estoque de ChikTop possui: " + medicamento[2].getQuantidadeRemedio());
+                                    "O estoque de CovidUltra possui: " + medicamento[0].getQuantidadeRemedio()
+                                            + "caixas");
+                            System.out.println(
+                                    "O estoque de Zicox possui: " + medicamento[1].getQuantidadeRemedio() + "caixas");
+                            System.out.println(
+                                    "O estoque de ChikTop possui: " + medicamento[2].getQuantidadeRemedio() + "caixas");
                             System.out
-                                    .println("O estoque de Denguenit possui: " + medicamento[3].getQuantidadeRemedio());
-                            System.out.println("------------------------------------------------ ");
+                                    .println("O estoque de Denguenit possui: " + medicamento[3].getQuantidadeRemedio()
+                                            + "caixas");
+                            System.out.println("----------------------------------------------------------- ");
+                            System.out.println(" ");
                             break;
-                        case 2:
+                        case 2:// Alterar estoque
                             int opcaoAlteraEstoque = 0;
                             do {
+                                System.out.println("Escolha o estoque de remédio que deseja alterar");
                                 System.out.println("1 - Alterar estoque de CovidUltra");
                                 System.out.println("2 - Alterar estoque de Zicox");
                                 System.out.println("3 - Alterar estoque de ChikTop");
@@ -141,23 +155,35 @@ public class App {
                             switch (opcaoAlteraEstoque) {
                                 case 1: // Alterar quantidade de coviultra
                                     System.out.println("Digite a nova quantidade de CovidUltra do estoque");
-                                    int cAltera = key.nextInt();
-                                    medicamento[0].setQuantidadeRemedio(cAltera);
+                                    int covidAltera = key.nextInt();
+                                    medicamento[0].setQuantidadeRemedio(covidAltera);
+                                    System.out.println("Estoque de CovidUltra atualizado");
+                                    System.out.println("----------------------------------------------------------- ");
+                                    System.out.println(" ");
                                     break;
                                 case 2: // Alterar quantidade de zicox
                                     System.out.println("Digite a nova quantidade de Zicox do estoque");
-                                    int zAltera = key.nextInt();
-                                    medicamento[1].setQuantidadeRemedio(zAltera);
+                                    int zicAltera = key.nextInt();
+                                    medicamento[1].setQuantidadeRemedio(zicAltera);
+                                    System.out.println("Estoque de Zicox atualizado");
+                                    System.out.println("----------------------------------------------------------- ");
+                                    System.out.println(" ");
                                     break;
-                                case 3: // Alterar a quantidade de ChikTopbreak;
+                                case 3: // Alterar a quantidade de ChikTop
                                     System.out.println("Digite a nova quantidade de ChikTop do estoque");
                                     int chikAltera = key.nextInt();
                                     medicamento[2].setQuantidadeRemedio(chikAltera);
+                                    System.out.println("Estoque de ChikTop atualizado");
+                                    System.out.println("----------------------------------------------------------- ");
+                                    System.out.println(" ");
                                     break;
                                 case 4: // alterar a quantidade de Denguenit
                                     System.out.println("Digite a nova quantidade de Denguenit do estoque");
-                                    int dAltera = key.nextInt();
-                                    medicamento[3].setQuantidadeRemedio(dAltera);
+                                    int dengAltera = key.nextInt();
+                                    medicamento[3].setQuantidadeRemedio(dengAltera);
+                                    System.out.println("Estoque de Denguenit atualizado");
+                                    System.out.println("----------------------------------------------------------- ");
+                                    System.out.println(" ");
                                     break;
                             }
                             break;
@@ -165,7 +191,9 @@ public class App {
                     break;
 
                 case 5:
-                    System.out.println(" FIM DO PROGRAMA");
+                    System.out.println("----------------------------------------------------------- ");
+                    System.out.println("Obrigado por utilizar nosso programa");
+                    System.out.println("----------------------------------------------------------- ");
                     saida = 5;
                     break;
 
@@ -177,8 +205,8 @@ public class App {
         // cadastro.organizarVetor(paciente);
         // cadastro.AddPaciente(c);
         // cadastro.imprimeOcupado();
-        // int local = cadastro.localizarPaciente(null);
-        // cadastro.removerPaciente(paciente, local);
+        // int localPac = cadastro.localizarPaciente(null);
+        // cadastro.removerPaciente(paciente, localPac);
         // cadastro.imprimeOcupado();
         // key.close();
     }

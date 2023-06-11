@@ -26,7 +26,7 @@ public class CadastroPaciente {
   };
 
   public int localizarPaciente(String cpf) {
-    int selecionado = -1;
+    int selecionado = 0;
     for (int i = 0; i < tamanho; i++) {
       if (pacientes[i] != null && pacientes[i].getCpf() == cpf) {
         selecionado = i;
@@ -37,12 +37,15 @@ public class CadastroPaciente {
 
   public boolean AddPaciente(Paciente c) { // Adiciona pacientes ao Vetor
     if (index >= pacientes.length) {
+      System.out.println("----------------------------------------------------------- ");
       System.out.println("A UPA está lotada, estamos sem espaços para novos pacientes ");
-      System.out.println("------------------------------------ ");
+      System.out.println("----------------------------------------------------------- ");
       return false;
     } else {
+      System.out.println("----------------------------------------------------------- ");
       System.out.println("Paciente cadatrado com sucesso ");
-      System.out.println("------------------------------------ ");
+      System.out.println("----------------------------------------------------------- ");
+      System.out.println(" ");
       pacientes[index] = c;
       index++;
       return true;
@@ -52,9 +55,15 @@ public class CadastroPaciente {
   public void removerPaciente(Paciente[] p, int posicao) {
     if (p[posicao] != null) {
       p[posicao] = null;
+      System.out.println("----------------------------------------------------------- ");
       System.out.println("O paciente da posição " + posicao + " foi apagado do sistema.");
+      System.out.println("----------------------------------------------------------- ");
+      System.out.println(" ");
     } else {
+      System.out.println("----------------------------------------------------------- ");
       System.out.println("Não foi encontrado nenhum paciente na posição: " + posicao);
+      System.out.println("----------------------------------------------------------- ");
+      System.out.println(" ");
     }
   }
 
@@ -74,7 +83,7 @@ public class CadastroPaciente {
     }
   }
 
-  public void contaDoenças() {
+  public void porcentDoenças() {
     int contCovid = 0;
     int contZika = 0;
     int contChikungunya = 0;
@@ -110,12 +119,15 @@ public class CadastroPaciente {
     }
     System.out.println("Total de pacientes registrados: " + total + "\nCovid: " + percentCovid + "%\nZika: "
         + percentZika + "%\nChikungunya: " + percentChikungunya + "%\nDengue: " + percentDengue);
+    System.out.println("----------------------------------------------------------- ");
+    System.out.println("");
   }
 
   public void imprimeTodoVetor() {
     for (int i = 0; i < pacientes.length; i++) {
       if (pacientes[i] != null) {
-        System.out.println(" \nPosição: " + i);
+
+        System.out.println("Posição: " + i);
         System.out.println("Nome do Paciente:  " + pacientes[i].getNome());
         System.out.println("Cpf do paciente: " + pacientes[i].getCpf());
         System.out.println("Celucar do paciente: " + pacientes[i].getTelefone());
@@ -123,10 +135,9 @@ public class CadastroPaciente {
         System.out.println("Medicamento receitado: " + pacientes[i].getMedicamentoIndicado());
         System.out.println("Quantidade de caixas raceitadas: " + pacientes[i].getQuantidadeCaixas());
         System.out.println(" ");
-
-      }
-      if (pacientes[i] == null) {
-        System.out.println("\nEssa posição não está cadastrada: " + i);
+      } else if (pacientes[i] == null) {
+        System.out.println("Essa posição não está cadastrada: " + i);
+        System.out.println(" ");
       }
     }
 
@@ -135,7 +146,7 @@ public class CadastroPaciente {
   public void imprimeOcupado() {
     for (int i = 0; i < pacientes.length; i++) {
       if (pacientes[i] != null) {
-        System.out.println(" \n Posição: " + i);
+        System.out.println("Posição: " + i);
         System.out.println("Nome do Paciente:  " + pacientes[i].getNome());
         System.out.println("Cpf do paciente: " + pacientes[i].getCpf());
         System.out.println("Celulcar do paciente: " + pacientes[i].getTelefone());
