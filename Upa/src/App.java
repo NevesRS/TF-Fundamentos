@@ -69,22 +69,17 @@ public class App {
                     do {
                         System.out.println("Digite a quantidade de remédio receitada para o paciente: ");
                         quant = key.nextInt();
-                        if (quant < medicamento[remed - 1].getQuantidadeRemedio()) {
-                            medicamento[remed - 1]
-                                    .setQuantidadeRemedio(medicamento[remed - 1].getQuantidadeRemedio() - quant);
-                            Paciente completarPaciente = new Paciente(nome, cpf, tel, diag,
-                                    medicamento[remed - 1].getNomeRemedio(), quant);
-                            cadastro.AddPaciente(completarPaciente);
-                        } else {
-                            System.out.println("Quantidade indisponível no estoque!");
+                        if(quant > medicamento[remed - 1].getQuantidadeRemedio()){
+                            System.out.println("Quantidade indisponivel no estoque!");
                         }
                     } while (quant > medicamento[remed - 1].getQuantidadeRemedio());
+                    cadastro.alterarRemedio(quant, medicamento, remed, nome, cpf, tel, diag);
                     break;
                 case 2: // removerPac paciente
                     System.out.println("Digite o cpf do paciente que você deseja remover: ");
                     String removerPac = key.nextLine();
-                    cadastro.organizarVetor(paciente);
                     cadastro.removerPaciente(paciente, removerPac);
+                    cadastro.organizarVetor(paciente);
                     break;
                 case 3: // Menu do sistema de pacientes
                     int menuFichas;

@@ -65,13 +65,24 @@ public class CadastroPaciente {
           System.out.println(" ");
           pacientes[i] = null;
         }
-      } 
+      }
     }
-    if(existe == false){
+    if (existe == false) {
       System.out.println("----------------------------------------------------------- ");
-          System.out.println("Não existe nenhuma paciente com CPF: "+cpf);
-          System.out.println("----------------------------------------------------------- ");
-          System.out.println(" ");
+      System.out.println("Não existe nenhuma paciente com CPF: " + cpf);
+      System.out.println("----------------------------------------------------------- ");
+      System.out.println(" ");
+    }
+  }
+
+  public void alterarRemedio(int quant, Medicamento[] medicamento, int remed, String nome, String cpf, String tel,
+      int diag) {
+    if (quant <= medicamento[remed - 1].getQuantidadeRemedio()) {
+      medicamento[remed - 1]
+          .setQuantidadeRemedio(medicamento[remed - 1].getQuantidadeRemedio() - quant);
+      Paciente completarPaciente = new Paciente(nome, cpf, tel, diag,
+          medicamento[remed - 1].getNomeRemedio(), quant);
+      AddPaciente(completarPaciente);
     }
   }
 
