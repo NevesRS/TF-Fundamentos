@@ -25,18 +25,69 @@ public class CadastroPaciente {
     this.tamanho = tamanho;
   };
 
-  public void localizarPaciente(String cpf) {
-    for (int i = 0; i < pacientes.length; i++) {
-      if (pacientes[i] != null) {
-        if (pacientes[i].getCpf().equals(cpf)) {
-          System.out.println(pacientes[i].getNome() + " foi removido da posição: " + i);
-          pacientes[i] = null;
-        }
+  // public void localizarPaciente(String cpf) {
+  // for (int i = 0; i < pacientes.length; i++) {
+  // if (pacientes[i] != null) {
+  // if (pacientes[i].getCpf().equals(cpf)) {
+  // System.out.println(pacientes[i].getNome() + " foi removido da posição: " +
+  // i);
+  // pacientes[i] = null;
+  // }
+  // }
+  // }
+  // }
+
+  public int verificaLetras(String nome) {
+    int aux = 1;
+    for (int i = 0; i < nome.length(); i++) {
+      char a = nome.charAt(i);
+      if (a == '1' || a == '2' || a == '3' || a == '4' || a == '5' || a == '6' || a == '7' || a == '8' || a == '9') {
+        aux = 1;
+        i = nome.length();
+      } else {
+        aux = 2;
       }
     }
+    return aux;
   }
 
-  public boolean AddPaciente(Paciente c) { // Adiciona pacientes ao Vetor
+  public int verificaNumeros(String nome) {
+    int aux = 1;
+    for (int i = 0; i < nome.length(); i++) {
+      char a = nome.charAt(i);
+      if (a != '1' || a != '2' || a != '3' || a != '4' || a != '5' || a != '6' || a != '7' || a != '8' || a != '9') {
+        aux = 1;
+        i = nome.length();
+      } else {
+        aux = 2;
+      }
+    }
+    return aux;
+  }
+
+  public int tranforma(String valor) {
+    int aux = 0;
+    switch (valor) {
+      case "1":
+        aux = 1;
+        break;
+      case "2":
+        aux = 2;
+        break;
+      case "3":
+        aux = 3;
+        break;
+      case "4":
+        aux = 4;
+        break;
+      default:
+        System.out.println("Tente novamente");
+        aux = 5;
+    }
+    return aux;
+  }
+
+  public boolean addPaciente(Paciente c) { // Adiciona pacientes ao Vetor
     if (index >= pacientes.length) {
       System.out.println("----------------------------------------------------------- ");
       System.out.println("A UPA está lotada, estamos sem espaços para novos pacientes ");
@@ -82,7 +133,7 @@ public class CadastroPaciente {
           .setQuantidadeRemedio(medicamento[remed - 1].getQuantidadeRemedio() - quant);
       Paciente completarPaciente = new Paciente(nome, cpf, tel, diag,
           medicamento[remed - 1].getNomeRemedio(), quant);
-      AddPaciente(completarPaciente);
+      addPaciente(completarPaciente);
     }
   }
 
