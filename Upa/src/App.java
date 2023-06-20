@@ -19,6 +19,7 @@ public class App {
         cadastro.setPacientes(paciente);
 
         int saida = 0;
+        int opcaoPrincipalCode = 5;
         do {
             System.out.println("----------------------------------------------- ");
             System.out.println("|      Seja bem-vindo ao sistema da UPA       | ");
@@ -31,10 +32,11 @@ public class App {
             System.out.println("|  5 - Alterar alguma informação de paciente  | ");
             System.out.println("|  6 - Sair do programa                       | ");
             System.out.println("----------------------------------------------- ");
-            int opcaoPrincipal = key.nextInt();
+            opcaoPrincipalCode = key.nextInt();
+            // opcaoPrincipal = key.nextLine();
+            // opcaoPrincipalCode = cadastro.tranforma(opcaoPrincipal);
             key.nextLine();
-
-            switch (opcaoPrincipal) {
+            switch (opcaoPrincipalCode) {
                 case 1: // Adicionar paciente
                     int travaNome = 1;
                     String nome = " ";
@@ -328,6 +330,7 @@ public class App {
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Nome do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
+                            System.out.println(" ");
                             break;
                         case 2:
                             System.out.println("Atualize o CPF do paciente: ");
@@ -336,6 +339,7 @@ public class App {
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Cpf do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
+                            System.out.println(" ");
                             break;
                         case 3:
                             System.out.println("Atualize o telefone do paciente: ");
@@ -344,6 +348,7 @@ public class App {
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Telefone do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
+                            System.out.println(" ");
                             break;
                         case 4:
                             System.out.println("Atualize o diagnóstico do paciente: ");
@@ -356,6 +361,7 @@ public class App {
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Diagnóstico do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
+                            System.out.println(" ");
                             break;
                         case 5:
                             System.out.println("Atualize o remédio receitado para o paciente: ");
@@ -370,6 +376,10 @@ public class App {
                                     "4 - Denguenit (" + medicamento[3].getQuantidadeRemedio() + " em estoque)");
                             String novoRemed = key.nextLine();
                             paciente[infoCpf].setMedicamentoIndicado(novoRemed);
+                            System.out.println("----------------------------------------------------------- ");
+                            System.out.println("Remédio do paciente atualizado com sucesso ");
+                            System.out.println("----------------------------------------------------------- ");
+                            System.out.println(" ");
                             break;
                         case 6:
                             System.out.println("Digite a nova quantidade receitada: ");
@@ -379,6 +389,10 @@ public class App {
                             int codigo = cadastro.tranforma(codigoMed);
                             medicamento[codigo - 1].setQuantidadeRemedio(
                                     medicamento[codigo - 1].getQuantidadeRemedio() - novaQuant);
+                            System.out.println("-----------------------------------------------------------");
+                            System.out.println("Quantidade receitada atualizada com sucesso ");
+                            System.out.println("-----------------------------------------------------------");
+                            System.out.println(" ");
                             break;
                     }
 
@@ -389,7 +403,7 @@ public class App {
                     System.out.println("----------------------------------------------------------- ");
                     saida = 6;
             }
-        } while (saida <= 0 || saida > 6);
+        } while (saida <= 0 || saida > 6 || opcaoPrincipalCode <= 0 || opcaoPrincipalCode > 6);
         key.close();
     }
 }
