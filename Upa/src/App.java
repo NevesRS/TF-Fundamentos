@@ -320,8 +320,10 @@ public class App {
                     }
                     break;
                     case 6:
-                    System.out.println("Obrigado por utilizar o sistema!");
-                    break;
+                    System.out.println("----------------------------------------------------------- ");
+                    System.out.println("Obrigado por utilizar nosso programa");
+                    System.out.println("----------------------------------------------------------- ");
+                    saida = 6;
             }
         } while (saida <= 0 || saida > 6);
         key.close();
