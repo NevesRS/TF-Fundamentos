@@ -28,9 +28,9 @@ public class CadastroPaciente {
   public int localizarPaciente(String cpf) {
     int posicao = -1;
     for (int i = 0; i < pacientes.length; i++) {
-      if (pacientes[i] != null) {        
+      if (pacientes[i] != null) {
         if (pacientes[i].getCpf().equals(cpf)) {
-            posicao = i;
+          posicao = i;
         }
       }
     }
@@ -51,8 +51,6 @@ public class CadastroPaciente {
     }
     return aux;
   }
-
-  
 
   public int verificaSeTemLetras(String cpf) {
     for (int i = 0; i < cpf.length(); i++) {
@@ -81,9 +79,16 @@ public class CadastroPaciente {
       case "4":
         aux = 4;
         break;
-      default:
-        System.out.println("Tente novamente");
+      case "5":
         aux = 5;
+        break;
+      case "6":
+        aux = 6;
+        break;
+      default:
+        System.out.println("Opção inválida, tente novamente");
+        aux = 7;
+        break;
     }
     return aux;
   }
