@@ -19,23 +19,30 @@ public class App {
         cadastro.setPacientes(paciente);
 
         int saida = 0;
+        String opcaoPrincipal;
         int opcaoPrincipalCode = 5;
+        System.out.println("----------------------------------------------------------- ");
+        System.out.println("Olá, pressione enter para entrar no programa");
+        System.out.println("----------------------------------------------------------- ");
         do {
-            System.out.println("----------------------------------------------- ");
-            System.out.println("|      Seja bem-vindo ao sistema da UPA       | ");
-            System.out.println("| ------------------------------------------- | ");
-            System.out.println("|        Escolha o que deseja fazer:          | ");
-            System.out.println("|  1 - Adicionar novo paciente                | ");
-            System.out.println("|  2 - Remover paciente                       | ");
-            System.out.println("|  3 - Gerenciar a ficha dos pacientes        | ");
-            System.out.println("|  4 - Gerenciar remédios                     | ");
-            System.out.println("|  5 - Alterar alguma informação de paciente  | ");
-            System.out.println("|  6 - Sair do programa                       | ");
-            System.out.println("----------------------------------------------- ");
-            opcaoPrincipalCode = key.nextInt();
-            // opcaoPrincipal = key.nextLine();
-            // opcaoPrincipalCode = cadastro.tranforma(opcaoPrincipal);
             key.nextLine();
+            do {
+                System.out.println("----------------------------------------------- ");
+                System.out.println("|      Seja bem-vindo ao sistema da UPA       | ");
+                System.out.println("| ------------------------------------------- | ");
+                System.out.println("|        Escolha o que deseja fazer:          | ");
+                System.out.println("|  1 - Adicionar novo paciente                | ");
+                System.out.println("|  2 - Remover paciente                       | ");
+                System.out.println("|  3 - Gerenciar a ficha dos pacientes        | ");
+                System.out.println("|  4 - Gerenciar remédios                     | ");
+                System.out.println("|  5 - Alterar alguma informação de paciente  | ");
+                System.out.println("|  6 - Sair do programa                       | ");
+                System.out.println("----------------------------------------------- ");
+                // opcaoPrincipalCode = key.nextInt();
+                opcaoPrincipal = key.nextLine();
+                opcaoPrincipalCode = cadastro.tranforma(opcaoPrincipal);
+                // key.nextLine();
+            } while (opcaoPrincipalCode <= 0 || opcaoPrincipalCode > 6);
             switch (opcaoPrincipalCode) {
                 case 1: // Adicionar paciente
                     int travaNome = 1;
@@ -403,7 +410,7 @@ public class App {
                     System.out.println("----------------------------------------------------------- ");
                     saida = 6;
             }
-        } while (saida <= 0 || saida > 6 || opcaoPrincipalCode <= 0 || opcaoPrincipalCode > 6);
+        } while (saida == 0);
         key.close();
     }
 }
