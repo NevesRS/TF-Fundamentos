@@ -28,7 +28,8 @@ public class App {
             System.out.println("|  2 - Remover paciente                       | ");
             System.out.println("|  3 - Gerenciar a ficha dos pacientes        | ");
             System.out.println("|  4 - Gerenciar remédios                     | ");
-            System.out.println("|  5 - Sair do programa                       | ");
+            System.out.println("|  5 - Alterar alguma informação de paciente  | ");
+            System.out.println("|  6 - Sair do programa                       | ");
             System.out.println("----------------------------------------------- ");
             int opcaoPrincipal = key.nextInt();
             key.nextLine();
@@ -318,8 +319,11 @@ public class App {
                         }
                     }
                     break;
+                    case 6:
+                    System.out.println("Obrigado por utilizar o sistema!");
+                    break;
             }
-        } while (saida <= 0 || saida > 5);
+        } while (saida <= 0 || saida > 6);
         key.close();
     }
 }
