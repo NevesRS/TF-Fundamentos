@@ -12,8 +12,8 @@ public class App {
 
         Paciente[] paciente = new Paciente[10];
 
-        // paciente[0] = new Paciente("Bruno", "123", null, 0, null, 0);
-        // paciente[1] = new Paciente("Bruno2", "1234", null, 0, null, 0);
+        paciente[0] = new Paciente("Bruno", "123", null, 0, null, 0);
+        paciente[1] = new Paciente("Aline", "1234", null, 0, null, 0);
 
         CadastroPaciente cadastro = new CadastroPaciente(10);
         cadastro.setPacientes(paciente);
@@ -135,7 +135,7 @@ public class App {
                         System.out.println("| 4 - Ordenar todos os pacientes em ordem alfabética:     | "); // NC
                         System.out.println("----------------------------------------------------------- ");
                         menuFichas = key.nextInt();
-                    } while (menuFichas >= 4 || menuFichas <= 0);
+                    } while (menuFichas >= 5 || menuFichas <= 0);
                     switch (menuFichas) {
                         case 1:
                             System.out.println("Aqui está a ficha com os pacientes internados:  ");
@@ -158,6 +158,40 @@ public class App {
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
                             break;
+                        case 4:
+                            System.out.println("Aqui está o relatório de pacientes em ordem alfabética: ");
+                            System.out.println(" ");
+                            int cont = 0;
+                            for (int i = 0; i < paciente.length; i++) {
+                                if (paciente[i] != null) {
+                                    cont++;
+                                }
+                            }
+                            String[] nomes = new String[cont];
+                            int index = 0;
+                            for (int i = 0; i < paciente.length; i++) {
+                                if (paciente[i] != null) {
+                                    nomes[index] = paciente[i].getNome();
+                                    index++;
+                                }
+                            }
+                            Arrays.sort(nomes);
+                            for (int j = 0; j < nomes.length; j++) {
+                                for (int i = 0; i < paciente.length; i++) {
+                                    if (paciente[i] != null && nomes[j].equals(paciente[i].getNome())) {
+                                        Paciente temp = paciente[j];
+                                        paciente[j] = paciente[i];
+                                        paciente[i] = temp;
+                                    }
+                                }
+                            }
+                            for (int i = 0; i < paciente.length; i++) {
+                                if (paciente[i] != null) {
+                                    System.out.println(paciente[i]+"\n");
+                                }
+                            }
+                            System.out.println("----------------------------------------------------------- ");
+                            System.out.println(" ");
                     }
                     break;
 
@@ -268,58 +302,69 @@ public class App {
                     System.out.println("Digite o CPF do paciente:");
                     String cpfPaciente = key.nextLine();
                     int infoCpf = cadastro.localizarPaciente(cpfPaciente);
-                    if(infoCpf != -1){
+                    if (infoCpf != -1) {
                         System.out.println("O que você deseja alterar do paciente: \n" + paciente[infoCpf].getNome());
-                        System.out.println("1 - Nome: "+ paciente[infoCpf].getNome());
-                        System.out.println("2 - CPF: "+ paciente[infoCpf].getCpf());
-                        System.out.println("3 - Telefone: "+ paciente[infoCpf].getTelefone());
-                        System.out.println("4 - Diagnóstico: "+ paciente[infoCpf].getDiagnostico());
-                        System.out.println("5 - Medicamento: "+ paciente[infoCpf].getMedicamentoIndicado());
-                        System.out.println("6 - Quantidade de caixas: "+ paciente[infoCpf].getQuantidadeCaixas());
+                        System.out.println("1 - Nome: " + paciente[infoCpf].getNome());
+                        System.out.println("2 - CPF: " + paciente[infoCpf].getCpf());
+                        System.out.println("3 - Telefone: " + paciente[infoCpf].getTelefone());
+                        System.out.println("4 - Diagnóstico: " + paciente[infoCpf].getDiagnostico());
+                        System.out.println("5 - Medicamento: " + paciente[infoCpf].getMedicamentoIndicado());
+                        System.out.println("6 - Quantidade de caixas: " + paciente[infoCpf].getQuantidadeCaixas());
                         int alterPaciente = key.nextInt();
                         key.nextLine();
 
-                        switch(alterPaciente){
-                            case 1: System.out.println("Digite o  novo nome: ");
-                            String novoNome = key.nextLine();
-                            paciente[infoCpf].setNome(novoNome);
-                            break;
-                            case 2: System.out.println("Digite o  novo CPF: ");
-                            String novoCpf = key.nextLine();
-                            paciente[infoCpf].setCpf(novoCpf);
-                            break;
-                            case 3: System.out.println("Digite o  novo telefone: ");
-                            String novoTelefone = key.nextLine();
-                            paciente[infoCpf].setTelefone(novoTelefone);
-                            break;
-                            case 4: System.out.println("Digite o  novo diagnóstico: ");
-                            System.out.println("1 - Covid ");
-                            System.out.println("2 - Zica ");
-                            System.out.println("3 - Chikungunya ");
-                            System.out.println("4 - Dengue ");
-                            int novoDiag = key.nextInt();
-                            paciente[infoCpf].setDiagnostico(novoDiag);
-                            break;
-                            case 5: System.out.println("Digite o  novo medicamento: ");
-                            System.out.println("Escolha o remédio que foi receitado para o paciente: ");
-                            System.out.println("1 - CovidUltra (" + medicamento[0].getQuantidadeRemedio() + " em estoque)");
-                            System.out.println("2 - Zicox (" + medicamento[1].getQuantidadeRemedio() + " em estoque)");
-                            System.out.println("3 - ChikTop (" + medicamento[2].getQuantidadeRemedio() + " em estoque)");
-                            System.out.println("4 - Denguenit (" + medicamento[3].getQuantidadeRemedio() + " em estoque)");
-                            String novoRemed = key.nextLine();
-                            paciente[infoCpf].setMedicamentoIndicado(novoRemed);
-                            break;
-                            case 6: System.out.println("Digite a nova quantidade receitada: ");
-                            int novaQuant = key.nextInt();
-                            paciente[infoCpf].setQuantidadeCaixas(novaQuant);
-                            String codigoMed = paciente[infoCpf].getMedicamentoIndicado();
-                            int codigo = cadastro.tranforma(codigoMed);
-                            medicamento[codigo-1].setQuantidadeRemedio(medicamento[codigo-1].getQuantidadeRemedio()-novaQuant);
-                            break;
+                        switch (alterPaciente) {
+                            case 1:
+                                System.out.println("Digite o  novo nome: ");
+                                String novoNome = key.nextLine();
+                                paciente[infoCpf].setNome(novoNome);
+                                break;
+                            case 2:
+                                System.out.println("Digite o  novo CPF: ");
+                                String novoCpf = key.nextLine();
+                                paciente[infoCpf].setCpf(novoCpf);
+                                break;
+                            case 3:
+                                System.out.println("Digite o  novo telefone: ");
+                                String novoTelefone = key.nextLine();
+                                paciente[infoCpf].setTelefone(novoTelefone);
+                                break;
+                            case 4:
+                                System.out.println("Digite o  novo diagnóstico: ");
+                                System.out.println("1 - Covid ");
+                                System.out.println("2 - Zica ");
+                                System.out.println("3 - Chikungunya ");
+                                System.out.println("4 - Dengue ");
+                                int novoDiag = key.nextInt();
+                                paciente[infoCpf].setDiagnostico(novoDiag);
+                                break;
+                            case 5:
+                                System.out.println("Digite o  novo medicamento: ");
+                                System.out.println("Escolha o remédio que foi receitado para o paciente: ");
+                                System.out.println(
+                                        "1 - CovidUltra (" + medicamento[0].getQuantidadeRemedio() + " em estoque)");
+                                System.out.println(
+                                        "2 - Zicox (" + medicamento[1].getQuantidadeRemedio() + " em estoque)");
+                                System.out.println(
+                                        "3 - ChikTop (" + medicamento[2].getQuantidadeRemedio() + " em estoque)");
+                                System.out.println(
+                                        "4 - Denguenit (" + medicamento[3].getQuantidadeRemedio() + " em estoque)");
+                                String novoRemed = key.nextLine();
+                                paciente[infoCpf].setMedicamentoIndicado(novoRemed);
+                                break;
+                            case 6:
+                                System.out.println("Digite a nova quantidade receitada: ");
+                                int novaQuant = key.nextInt();
+                                paciente[infoCpf].setQuantidadeCaixas(novaQuant);
+                                String codigoMed = paciente[infoCpf].getMedicamentoIndicado();
+                                int codigo = cadastro.tranforma(codigoMed);
+                                medicamento[codigo - 1].setQuantidadeRemedio(
+                                        medicamento[codigo - 1].getQuantidadeRemedio() - novaQuant);
+                                break;
                         }
                     }
                     break;
-                    case 6:
+                case 6:
                     System.out.println("----------------------------------------------------------- ");
                     System.out.println("Obrigado por utilizar nosso programa");
                     System.out.println("----------------------------------------------------------- ");

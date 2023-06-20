@@ -52,6 +52,8 @@ public class CadastroPaciente {
     return aux;
   }
 
+  
+
   public int verificaSeTemLetras(String cpf) {
     for (int i = 0; i < cpf.length(); i++) {
       char a = cpf.charAt(i);
