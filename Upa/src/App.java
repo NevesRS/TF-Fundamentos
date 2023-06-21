@@ -38,11 +38,10 @@ public class App {
                 System.out.println("|  5 - Alterar alguma informação de paciente  | ");
                 System.out.println("|  6 - Sair do programa                       | ");
                 System.out.println("----------------------------------------------- ");
-                // opcaoPrincipalCode = key.nextInt();
                 opcaoPrincipal = key.nextLine();
                 opcaoPrincipalCode = cadastro.tranforma(opcaoPrincipal);
-                // key.nextLine();
             } while (opcaoPrincipalCode <= 0 || opcaoPrincipalCode > 6);
+
             switch (opcaoPrincipalCode) {
                 case 1: // Adicionar paciente
                     int travaNome = 1;
@@ -368,12 +367,18 @@ public class App {
                     break;
 
                 case 5:
-                    int alterPaciente = 1;
-                    System.out.println("Digite o CPF do paciente que você deseja alterar a ficha:");
-                    String cpfPaciente = key.nextLine();
-                    int infoCpf = cadastro.localizarPaciente(cpfPaciente);
+                    int alterPaciente = 0;
+                    String cpfPaciente;
+                    int cpfPacienteCode;
                     do {
-                        if (infoCpf != -1) {
+                        System.out.println("Digite o CPF do paciente que você deseja alterar a ficha: ");
+                        cpfPaciente = key.nextLine();
+                        cpfPacienteCode = cadastro.verificaSeTemLetras(cpfPaciente);
+                    } while (cpfPacienteCode == 1 || cpfPaciente.length() != 11);
+
+                    int infoCpf = cadastro.localizarPaciente(cpfPaciente);
+                    if (infoCpf != -1) {
+                        do {
                             System.out.println("O que você deseja alterar do paciente: " + paciente[infoCpf].getNome());
                             System.out.println("1 - Nome: " + paciente[infoCpf].getNome());
                             System.out.println("2 - CPF: " + paciente[infoCpf].getCpf());
@@ -383,12 +388,14 @@ public class App {
                             System.out.println("6 - Quantidade de caixas: " + paciente[infoCpf].getQuantidadeCaixas());
                             alterPaciente = key.nextInt();
                             key.nextLine();
-                        }
-                        if (alterPaciente <= 0 || alterPaciente > 6) {
-                            System.out.println("Número inváilido, tente novamente");
-                            System.out.println(" ");
-                        }
-                    } while (alterPaciente <= 0 || alterPaciente > 6);
+                            if (alterPaciente <= 0 || alterPaciente > 6) {
+                                System.out.println("Número inváilido, tente novamente");
+                                System.out.println(" ");
+                            }
+                        } while (alterPaciente <= 0 || alterPaciente > 6);
+                    } else {
+                        System.out.println("Paciente com o cpf: " + cpfPaciente + " não foi encontrado");
+                    }
                     switch (alterPaciente) {
                         case 1:
                             int travaNovoNome;
@@ -451,19 +458,34 @@ public class App {
                         case 5:
                             String novoRemed;
                             int novoRemedCode;
-                            System.out.println("Atualize o remédio receitado para o paciente: ");
-                            System.out.println("Escolha o remédio que foi receitado para o paciente: ");
-                            System.out.println(
-                                    "1 - CovidUltra (" + medicamento[0].getQuantidadeRemedio() + " em estoque)");
-                            System.out.println(
-                                    "2 - Zicox (" + medicamento[1].getQuantidadeRemedio() + " em estoque)");
-                            System.out.println(
-                                    "3 - ChikTop (" + medicamento[2].getQuantidadeRemedio() + " em estoque)");
-                            System.out.println(
-                                    "4 - Denguenit (" + medicamento[3].getQuantidadeRemedio() + " em estoque)");
-                            novoRemed = key.nextLine();
-                            novoRemedCode = cadastro.tranforma(novoRemed);
-                            paciente[infoCpf].setMedicamentoIndicado(novoRemed);
+                            do {
+                                System.out.println("Atualize o remédio receitado para o paciente: ");
+                                System.out.println("Escolha o remédio que foi receitado para o paciente: ");
+                                System.out.println(
+                                        "1 - CovidUltra (" + medicamento[0].getQuantidadeRemedio() + " em estoque)");
+                                System.out.println(
+                                        "2 - Zicox (" + medicamento[1].getQuantidadeRemedio() + " em estoque)");
+                                System.out.println(
+                                        "3 - ChikTop (" + medicamento[2].getQuantidadeRemedio() + " em estoque)");
+                                System.out.println(
+                                        "4 - Denguenit (" + medicamento[3].getQuantidadeRemedio() + " em estoque)");
+                                novoRemed = key.nextLine();
+                                novoRemedCode = cadastro.tranforma(novoRemed);
+                            } while (novoRemedCode < 0 || novoRemedCode > 4);
+
+                            switch (novoRemedCode) {
+                                case 1:
+                                    paciente[infoCpf].setMedicamentoIndicado("CovidUltra");
+                                    break;
+                                case 2:
+                                    paciente[infoCpf].setMedicamentoIndicado("Zicox");
+                                    break;
+                                case 3:
+                                    paciente[infoCpf].setMedicamentoIndicado("ChikTop");
+                                    break;
+                                case 4:
+                                    paciente[infoCpf].setMedicamentoIndicado("Denguenit");
+                            }
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Remédio do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
