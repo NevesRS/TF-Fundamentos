@@ -25,8 +25,8 @@ public class App {
         System.out.println("Olá, pressione enter para entrar no programa");
         System.out.println("----------------------------------------------------------- ");
         do {
-            key.nextLine();
             do {
+                key.nextLine();
                 System.out.println("----------------------------------------------- ");
                 System.out.println("|      Seja bem-vindo ao sistema da UPA       | ");
                 System.out.println("| ------------------------------------------- | ");
@@ -130,9 +130,13 @@ public class App {
                     } while (removerPac.length() != 11);
                     cadastro.removerPaciente(paciente, removerPac);
                     cadastro.organizarVetor(paciente);
+                    System.out.println("----------------------------------------------------------- ");
+                    System.out.println("Pressione enter para voltar ao menu");
+                    System.out.println("----------------------------------------------------------- ");
                     break;
 
                 case 3: // Menu do sistema de pacientes
+                    String fichas;
                     int menuFichas;
                     do {
                         System.out.println("----------------------------------------------------------- ");
@@ -143,7 +147,8 @@ public class App {
                         System.out.println("| 3 - Mostrar porcentagem de ocorrência de cada doença:   | ");
                         System.out.println("| 4 - Ordenar todos os pacientes em ordem alfabética:     | "); // NC
                         System.out.println("----------------------------------------------------------- ");
-                        menuFichas = key.nextInt();
+                        fichas = key.nextLine();
+                        menuFichas = cadastro.tranforma(fichas);
                     } while (menuFichas >= 5 || menuFichas <= 0);
                     switch (menuFichas) {
                         case 1:
@@ -151,21 +156,24 @@ public class App {
                             System.out.println(" ");
                             cadastro.imprimeOcupado();
                             System.out.println("----------------------------------------------------------- ");
-                            System.out.println(" ");
+                            System.out.println("Pressione enter para voltar ao menu");
+                            System.out.println("----------------------------------------------------------- ");
                             break;
                         case 2:
                             System.out.println("Aqui está a ficha com os pacientes e os leitos ainda disponiveis: ");
                             System.out.println(" ");
                             cadastro.imprimeTodoVetor();
                             System.out.println("----------------------------------------------------------- ");
-                            System.out.println(" ");
+                            System.out.println("Pressione enter para voltar ao menu");
+                            System.out.println("----------------------------------------------------------- ");
                             break;
                         case 3:
                             System.out.println("Aqui está o relatório da ocorrência das doenças no hospital: ");
                             System.out.println(" ");
                             cadastro.porcentDoenças();
                             System.out.println("----------------------------------------------------------- ");
-                            System.out.println(" ");
+                            System.out.println("Pressione enter para voltar ao menu");
+                            System.out.println("----------------------------------------------------------- ");
                             break;
                         case 4:
                             System.out.println("Aqui está o relatório de pacientes em ordem alfabética: ");
@@ -200,11 +208,13 @@ public class App {
                                 }
                             }
                             System.out.println("----------------------------------------------------------- ");
-                            System.out.println(" ");
+                            System.out.println("Pressione enter para voltar ao menu");
+                            System.out.println("----------------------------------------------------------- ");
                     }
                     break;
 
                 case 4: // Gerenciar remédios
+                    String remedioCode;
                     int menuRemedio;
                     do {
                         System.out.println("------------------------------------------------ ");
@@ -213,7 +223,8 @@ public class App {
                         System.out.println("|  1 - Verificar o estoque de remédios:        | ");
                         System.out.println("|  2 - Alterar o estoque:                      | ");
                         System.out.println("------------------------------------------------ ");
-                        menuRemedio = key.nextInt();
+                        remedioCode = key.nextLine();
+                        menuRemedio = cadastro.tranforma(remedioCode);
                     } while (menuRemedio <= 0 || menuRemedio > 2);
                     switch (menuRemedio) {
                         case 1: // Mostrar todo o estoque
@@ -229,9 +240,11 @@ public class App {
                                     .println("O estoque de Denguenit possui: " + medicamento[3].getQuantidadeRemedio()
                                             + "caixas");
                             System.out.println("----------------------------------------------------------- ");
-                            System.out.println(" ");
+                            System.out.println("Pressione enter para voltar ao menu");
+                            System.out.println("----------------------------------------------------------- ");
                             break;
                         case 2:// Alterar estoque
+                            String alteraEstoqueCode;
                             int opcaoAlteraEstoque = 0;
                             do {
                                 System.out.println("Escolha o estoque de remédio que deseja alterar");
@@ -239,68 +252,106 @@ public class App {
                                 System.out.println("2 - Alterar estoque de Zicox");
                                 System.out.println("3 - Alterar estoque de ChikTop");
                                 System.out.println("4 - Alterar estoque de Denguenit");
-                                opcaoAlteraEstoque = key.nextInt();
+                                alteraEstoqueCode = key.nextLine();
+                                opcaoAlteraEstoque = cadastro.tranforma(alteraEstoqueCode);
                             } while (opcaoAlteraEstoque > 4 || opcaoAlteraEstoque <= 0);
                             switch (opcaoAlteraEstoque) {
                                 case 1: // Alterar quantidade de coviultra
+                                    String covidAltera;
+                                    int travaCovidAltera;
                                     do {
                                         System.out.println("Digite a nova quantidade de CovidUltra do estoque");
-                                        int covidAltera = key.nextInt();
-                                        medicamento[0].setQuantidadeRemedio(covidAltera);
+                                        covidAltera = key.nextLine();
+                                        travaCovidAltera = cadastro.verificaSeTemLetras(covidAltera);
+                                        medicamento[0].setQuantidadeRemedio(travaCovidAltera);
+                                        if (travaCovidAltera == 1) {
+                                            System.out.println("Entrada inválida, tente novamente");
+                                        }
                                         if (medicamento[0].getQuantidadeRemedio() < 0) {
                                             System.out.println(
                                                     "Quantidades de caixas de CovidUltra inválida, tente novamente");
                                         }
-                                    } while (medicamento[0].getQuantidadeRemedio() < 0);
+                                    } while (medicamento[0].getQuantidadeRemedio() < 0 || travaCovidAltera == 1);
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println("Estoque de CovidUltra atualizado");
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println(" ");
+                                    System.out.println("----------------------------------------------------------- ");
+                                    System.out.println("Pressione enter para voltar ao menu");
+                                    System.out.println("----------------------------------------------------------- ");
                                     break;
                                 case 2: // Alterar quantidade de zicox
+                                    String zicAltera;
+                                    int travaZicAltera;
                                     do {
                                         System.out.println("Digite a nova quantidade de Zicox do estoque");
-                                        int zicAltera = key.nextInt();
-                                        medicamento[1].setQuantidadeRemedio(zicAltera);
+                                        zicAltera = key.nextLine();
+                                        travaZicAltera = cadastro.verificaSeTemLetras(zicAltera);
+                                        medicamento[1].setQuantidadeRemedio(travaZicAltera);
+                                        if (travaZicAltera == 1) {
+                                            System.out.println("Entrada inválida, tente novamente ");
+                                        }
                                         if (medicamento[1].getQuantidadeRemedio() < 0) {
                                             System.out.println(
                                                     "Quantidades de caixas de Zicox inválida, tente novamente");
                                         }
-                                    } while (medicamento[1].getQuantidadeRemedio() < 0);
+                                    } while (medicamento[1].getQuantidadeRemedio() < 0 || travaZicAltera == 1);
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println("Estoque de Zicox atualizado");
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println(" ");
+                                    System.out.println("----------------------------------------------------------- ");
+                                    System.out.println("Pressione enter para voltar ao menu");
+                                    System.out.println("----------------------------------------------------------- ");
                                     break;
                                 case 3: // Alterar a quantidade de ChikTop
+                                    String chikAltera;
+                                    int travaChikAltera;
                                     do {
                                         System.out.println("Digite a nova quantidade de ChikTop do estoque");
-                                        int chikAltera = key.nextInt();
-                                        medicamento[2].setQuantidadeRemedio(chikAltera);
+                                        chikAltera = key.nextLine();
+                                        travaChikAltera = cadastro.verificaLetras(chikAltera);
+                                        medicamento[2].setQuantidadeRemedio(travaChikAltera);
+                                        if (travaChikAltera == 1) {
+                                            System.out.println("Entrada inválida, tente novamente ");
+                                        }
                                         if (medicamento[2].getQuantidadeRemedio() < 0) {
                                             System.out.println(
                                                     "Quantidades de caixas de ChikTop inválida, tente novamente");
                                         }
-                                    } while (medicamento[2].getQuantidadeRemedio() < 0);
+                                    } while (medicamento[2].getQuantidadeRemedio() < 0 || travaChikAltera == 1);
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println("Estoque de ChikTop atualizado");
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println(" ");
+                                    System.out.println("----------------------------------------------------------- ");
+                                    System.out.println("Pressione enter para voltar ao menu");
+                                    System.out.println("----------------------------------------------------------- ");
                                     break;
                                 case 4: // alterar a quantidade de Denguenit
+                                    String dengAltera;
+                                    int travaDengAltera;
                                     do {
                                         System.out.println("Digite a nova quantidade de Denguenit do estoque");
-                                        int dengAltera = key.nextInt();
-                                        medicamento[3].setQuantidadeRemedio(dengAltera);
+                                        dengAltera = key.nextLine();
+                                        travaDengAltera = cadastro.verificaSeTemLetras(dengAltera);
+                                        medicamento[3].setQuantidadeRemedio(travaDengAltera);
+                                        if (travaDengAltera == 1) {
+                                            System.out.println("Entrada inválida, tente novamente ");
+                                        }
                                         if (medicamento[3].getQuantidadeRemedio() < 0) {
                                             System.out.println(
                                                     "Quantidades de caixas de Denguenit inválida, tente novamente");
                                         }
-                                    } while (medicamento[3].getQuantidadeRemedio() < 0);
+                                    } while (medicamento[3].getQuantidadeRemedio() < 0 || travaDengAltera == 1);
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println("Estoque de Denguenit atualizado");
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println(" ");
+                                    System.out.println("----------------------------------------------------------- ");
+                                    System.out.println("Pressione enter para voltar ao menu");
+                                    System.out.println("----------------------------------------------------------- ");
+
                                     break;
                             }
                             break;
