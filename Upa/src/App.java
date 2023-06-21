@@ -107,15 +107,24 @@ public class App {
                         remedioCodigo = cadastro.tranforma(remedio);
                     } while (remedioCodigo < 1 || remedioCodigo > 4);
 
-                    int quant = 0;
+                    String quant;
+                    int quantTrava;
+                    int quantCode = 0;
                     do {
                         System.out.println("Digite a quantidade de remédio receitada para o paciente: ");
-                        quant = key.nextInt();
-                        if (quant > medicamento[remedioCodigo - 1].getQuantidadeRemedio() || quant < 0) {
+                        quant = key.nextLine();
+                        quantTrava = cadastro.verificaSeTemLetras(quant);
+                        if (quantTrava != 1) {
+                            quantCode = quantTrava;
+                        } else {
+                            System.out.println("Entrada de dados inválida, tente novamente");
+                        }
+                        if (quantCode > medicamento[remedioCodigo - 1].getQuantidadeRemedio() || quantCode < 0) {
                             System.out.println("Quantidade indisponivel no estoque!");
                         }
-                    } while (quant > medicamento[remedioCodigo - 1].getQuantidadeRemedio() || quant < 0);
-                    cadastro.alterarRemedio(quant, medicamento, remedioCodigo, nome, cpf, tel, diagnosticoCodigo);
+                    } while (quantCode > medicamento[remedioCodigo - 1].getQuantidadeRemedio() || quantCode < 0
+                            || quantTrava == 1);
+                    cadastro.alterarRemedio(quantCode, medicamento, remedioCodigo, nome, cpf, tel, diagnosticoCodigo);
                     break;
 
                 case 2: // removerPac paciente
@@ -382,46 +391,66 @@ public class App {
                     } while (alterPaciente <= 0 || alterPaciente > 6);
                     switch (alterPaciente) {
                         case 1:
-                            System.out.println("Atualize o nome do paciente: ");
-                            String novoNome = key.nextLine();
-                            paciente[infoCpf].setNome(novoNome);
+                            int travaNovoNome;
+                            do {
+                                System.out.println("Atualize o nome do paciente: ");
+                                String novoNome = key.nextLine();
+                                travaNovoNome = cadastro.verificaLetras(novoNome);
+                                paciente[infoCpf].setNome(novoNome);
+                            } while (travaNovoNome == 1);
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Nome do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
+
                             break;
                         case 2:
-                            System.out.println("Atualize o CPF do paciente: ");
-                            String novoCpf = key.nextLine();
-                            paciente[infoCpf].setCpf(novoCpf);
+                            int travaNovoCpf;
+                            do {
+                                System.out.println("Atualize o CPF do paciente: ");
+                                String novoCpf = key.nextLine();
+                                travaNovoCpf = cadastro.verificaLetras(novoCpf);
+                                paciente[infoCpf].setCpf(novoCpf);
+                            } while (travaNovoCpf == 1);
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Cpf do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
                             break;
                         case 3:
-                            System.out.println("Atualize o telefone do paciente: ");
-                            String novoTelefone = key.nextLine();
-                            paciente[infoCpf].setTelefone(novoTelefone);
+                            int travaNovoTelefone;
+                            do {
+                                System.out.println("Atualize o telefone do paciente: ");
+                                String novoTelefone = key.nextLine();
+                                travaNovoTelefone = cadastro.verificaLetras(novoTelefone);
+                                paciente[infoCpf].setTelefone(novoTelefone);
+                            } while (travaNovoTelefone == 1);
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Telefone do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
                             break;
                         case 4:
-                            System.out.println("Atualize o diagnóstico do paciente: ");
-                            System.out.println("1 - Covid ");
-                            System.out.println("2 - Zica ");
-                            System.out.println("3 - Chikungunya ");
-                            System.out.println("4 - Dengue ");
-                            int novoDiag = key.nextInt();
-                            paciente[infoCpf].setDiagnostico(novoDiag);
+                            String novoDiag;
+                            int novoDiagCode;
+                            do {
+                                System.out.println("Atualize o diagnóstico do paciente: ");
+                                System.out.println("1 - Covid ");
+                                System.out.println("2 - Zica ");
+                                System.out.println("3 - Chikungunya ");
+                                System.out.println("4 - Dengue ");
+                                novoDiag = key.next();
+                                novoDiagCode = cadastro.tranforma(novoDiag);
+                                paciente[infoCpf].setDiagnostico(novoDiagCode);
+                            } while (novoDiagCode <= 0 || novoDiagCode > 4);
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Diagnóstico do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
                             break;
                         case 5:
+                            String novoRemed;
+                            int novoRemedCode;
                             System.out.println("Atualize o remédio receitado para o paciente: ");
                             System.out.println("Escolha o remédio que foi receitado para o paciente: ");
                             System.out.println(
@@ -432,7 +461,8 @@ public class App {
                                     "3 - ChikTop (" + medicamento[2].getQuantidadeRemedio() + " em estoque)");
                             System.out.println(
                                     "4 - Denguenit (" + medicamento[3].getQuantidadeRemedio() + " em estoque)");
-                            String novoRemed = key.nextLine();
+                            novoRemed = key.nextLine();
+                            novoRemedCode = cadastro.tranforma(novoRemed);
                             paciente[infoCpf].setMedicamentoIndicado(novoRemed);
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Remédio do paciente atualizado com sucesso ");
