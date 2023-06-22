@@ -270,19 +270,23 @@ public class App {
                                 case 1: // Alterar quantidade de coviultra
                                     String covidAltera;
                                     int travaCovidAltera;
+                                    int covidAlteraInt = 0;
                                     do {
-                                        System.out.println("Digite a nova quantidade de CovidUltra do estoque");
-                                        covidAltera = key.nextLine();
-                                        travaCovidAltera = cadastro.verificacaoNumeros(covidAltera);
-                                        medicamento[0].setQuantidadeRemedio(travaCovidAltera);
-                                        if (travaCovidAltera == 1) {
+                                        System.out.println("Digite a nova quantidade de Zicox do estoque");
+                                        covidAltera = key.nextLine();                                      
+                                        travaCovidAltera = cadastro.verificacaoLetras(covidAltera);
+                                        if (travaCovidAltera == 2) {
                                             System.out.println("Entrada inválida, tente novamente");
-                                        }
-                                        if (medicamento[0].getQuantidadeRemedio() < 0) {
+                                        }    
+                                        if(travaCovidAltera == 1){
+                                            covidAlteraInt = Integer.parseInt(covidAltera);
+                                        }                                    
+                                        if (covidAlteraInt < 0) {
                                             System.out.println(
-                                                    "Quantidades de caixas de CovidUltra inválida, tente novamente");
+                                                    "Quantidades de caixas de ChikTop inválida, tente novamente");
                                         }
-                                    } while (medicamento[0].getQuantidadeRemedio() < 0 || travaCovidAltera == 1);
+                                    } while (covidAlteraInt < 0 || travaCovidAltera == 2);
+                                    medicamento[0].setQuantidadeRemedio(covidAlteraInt);
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println("Estoque de CovidUltra atualizado");
                                     System.out.println("----------------------------------------------------------- ");
@@ -294,19 +298,23 @@ public class App {
                                 case 2: // Alterar quantidade de zicox
                                     String zicAltera;
                                     int travaZicAltera;
+                                    int zicAlteraInt = 0;
                                     do {
                                         System.out.println("Digite a nova quantidade de Zicox do estoque");
-                                        zicAltera = key.nextLine();
-                                        travaZicAltera = cadastro.verificacaoNumeros(zicAltera);
-                                        medicamento[1].setQuantidadeRemedio(travaZicAltera);
-                                        if (travaZicAltera == 1) {
-                                            System.out.println("Entrada inválida, tente novamente ");
-                                        }
-                                        if (medicamento[1].getQuantidadeRemedio() < 0) {
+                                        zicAltera = key.nextLine();                                      
+                                        travaZicAltera = cadastro.verificacaoLetras(zicAltera);
+                                        if (travaZicAltera == 2) {
+                                            System.out.println("Entrada inválida, tente novamente");
+                                        }    
+                                        if(travaZicAltera == 1){
+                                            zicAlteraInt = Integer.parseInt(zicAltera);
+                                        }                                    
+                                        if (zicAlteraInt < 0) {
                                             System.out.println(
-                                                    "Quantidades de caixas de Zicox inválida, tente novamente");
+                                                    "Quantidades de caixas de ChikTop inválida, tente novamente");
                                         }
-                                    } while (medicamento[1].getQuantidadeRemedio() < 0 || travaZicAltera == 1);
+                                    } while (zicAlteraInt < 0 || travaZicAltera == 2);
+                                    medicamento[1].setQuantidadeRemedio(zicAlteraInt);
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println("Estoque de Zicox atualizado");
                                     System.out.println("----------------------------------------------------------- ");
@@ -318,19 +326,23 @@ public class App {
                                 case 3: // Alterar a quantidade de ChikTop
                                     String chikAltera;
                                     int travaChikAltera;
+                                    int chikAlteraInt = 0;
                                     do {
-                                        System.out.println("Digite a nova quantidade de ChikTop do estoque");
-                                        chikAltera = key.nextLine();
+                                        System.out.println("Digite a nova quantidade de Zicox do estoque");
+                                        chikAltera = key.nextLine();                                      
                                         travaChikAltera = cadastro.verificacaoLetras(chikAltera);
-                                        medicamento[2].setQuantidadeRemedio(travaChikAltera);
-                                        if (travaChikAltera == 1) {
-                                            System.out.println("Entrada inválida, tente novamente ");
-                                        }
-                                        if (medicamento[2].getQuantidadeRemedio() < 0) {
+                                        if (travaChikAltera == 2) {
+                                            System.out.println("Entrada inválida, tente novamente");
+                                        }    
+                                        if(travaChikAltera == 1){
+                                            chikAlteraInt = Integer.parseInt(chikAltera);
+                                        }                                    
+                                        if (chikAlteraInt < 0) {
                                             System.out.println(
                                                     "Quantidades de caixas de ChikTop inválida, tente novamente");
                                         }
-                                    } while (medicamento[2].getQuantidadeRemedio() < 0 || travaChikAltera == 1);
+                                    } while (chikAlteraInt < 0 || travaChikAltera == 2);
+                                    medicamento[2].setQuantidadeRemedio(chikAlteraInt);
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println("Estoque de ChikTop atualizado");
                                     System.out.println("----------------------------------------------------------- ");
@@ -342,19 +354,23 @@ public class App {
                                 case 4: // alterar a quantidade de Denguenit
                                     String dengAltera;
                                     int travaDengAltera;
+                                    int dengAlteraInt = 0;
                                     do {
-                                        System.out.println("Digite a nova quantidade de Denguenit do estoque");
-                                        dengAltera = key.nextLine();
-                                        travaDengAltera = cadastro.verificacaoNumeros(dengAltera);
-                                        medicamento[3].setQuantidadeRemedio(travaDengAltera);
-                                        if (travaDengAltera == 1) {
-                                            System.out.println("Entrada inválida, tente novamente ");
-                                        }
-                                        if (medicamento[3].getQuantidadeRemedio() < 0) {
+                                        System.out.println("Digite a nova quantidade de Zicox do estoque");
+                                        dengAltera = key.nextLine();                                      
+                                        travaDengAltera = cadastro.verificacaoLetras(dengAltera);
+                                        if (travaDengAltera == 2) {
+                                            System.out.println("Entrada inválida, tente novamente");
+                                        }    
+                                        if(travaDengAltera == 1){
+                                            dengAlteraInt = Integer.parseInt(dengAltera);
+                                        }                                    
+                                        if (dengAlteraInt < 0) {
                                             System.out.println(
-                                                    "Quantidades de caixas de Denguenit inválida, tente novamente");
+                                                    "Quantidades de caixas de ChikTop inválida, tente novamente");
                                         }
-                                    } while (medicamento[3].getQuantidadeRemedio() < 0 || travaDengAltera == 1);
+                                    } while (dengAlteraInt < 0 || travaDengAltera == 2);
+                                    medicamento[3].setQuantidadeRemedio(dengAlteraInt);
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println("Estoque de Denguenit atualizado");
                                     System.out.println("----------------------------------------------------------- ");
@@ -362,7 +378,6 @@ public class App {
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println("Pressione enter para voltar ao menu");
                                     System.out.println("----------------------------------------------------------- ");
-
                                     break;
                             }
                             break;
@@ -435,9 +450,9 @@ public class App {
                                 String novoNome = key.nextLine();
                                 travaNovoNome = cadastro.verificacaoLetras(novoNome);
                                 paciente[infoCpf].setNome(novoNome);
-                                // if (travaNovoNome == 1) {
-                                // System.out.println("Entrada inválida, tente novamente ");
-                                // }
+                                if (travaNovoNome == 1) {
+                                    System.out.println("Entrada inválida, tente novamente ");
+                                }
                             } while (travaNovoNome == 1);
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Nome do paciente atualizado com sucesso ");
@@ -462,9 +477,6 @@ public class App {
                             System.out.println("Cpf do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
-                            System.out.println("----------------------------------------------------------- ");
-                            System.out.println("Pressione enter para voltar ao menu");
-                            System.out.println("----------------------------------------------------------- ");
                             break;
                         case 3:
 
@@ -483,9 +495,6 @@ public class App {
                             System.out.println("Telefone do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
-                            System.out.println("----------------------------------------------------------- ");
-                            System.out.println("Pressione enter para voltar ao menu");
-                            System.out.println("----------------------------------------------------------- ");
                             break;
                         case 4:
 
@@ -503,9 +512,6 @@ public class App {
                             System.out.println("Diagnóstico do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
-                            System.out.println("----------------------------------------------------------- ");
-                            System.out.println("Pressione enter para voltar ao menu");
-                            System.out.println("----------------------------------------------------------- ");
                             break;
                         case 5:
 
@@ -541,9 +547,6 @@ public class App {
                             System.out.println("Remédio do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
-                            System.out.println("----------------------------------------------------------- ");
-                            System.out.println("Pressione enter para voltar ao menu");
-                            System.out.println("----------------------------------------------------------- ");
                             break;
 
                         case 6:
@@ -566,10 +569,6 @@ public class App {
                             System.out.println("Quantidade receitada atualizada com sucesso ");
                             System.out.println("-----------------------------------------------------------");
                             System.out.println(" ");
-                            System.out.println("----------------------------------------------------------- ");
-                            System.out.println("Pressione enter para voltar ao menu");
-                            System.out.println("----------------------------------------------------------- ");
-
                             break;
                     }
 
