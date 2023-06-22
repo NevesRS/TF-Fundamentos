@@ -435,9 +435,9 @@ public class App {
                                 String novoNome = key.nextLine();
                                 travaNovoNome = cadastro.verificacaoLetras(novoNome);
                                 paciente[infoCpf].setNome(novoNome);
-                                if (travaNovoNome == 1) {
-                                    System.out.println("Entrada inválida, tente novamente ");
-                                }
+                                // if (travaNovoNome == 1) {
+                                // System.out.println("Entrada inválida, tente novamente ");
+                                // }
                             } while (travaNovoNome == 1);
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Nome do paciente atualizado com sucesso ");
@@ -462,6 +462,9 @@ public class App {
                             System.out.println("Cpf do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
+                            System.out.println("----------------------------------------------------------- ");
+                            System.out.println("Pressione enter para voltar ao menu");
+                            System.out.println("----------------------------------------------------------- ");
                             break;
                         case 3:
 
@@ -480,6 +483,9 @@ public class App {
                             System.out.println("Telefone do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
+                            System.out.println("----------------------------------------------------------- ");
+                            System.out.println("Pressione enter para voltar ao menu");
+                            System.out.println("----------------------------------------------------------- ");
                             break;
                         case 4:
 
@@ -497,6 +503,9 @@ public class App {
                             System.out.println("Diagnóstico do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
+                            System.out.println("----------------------------------------------------------- ");
+                            System.out.println("Pressione enter para voltar ao menu");
+                            System.out.println("----------------------------------------------------------- ");
                             break;
                         case 5:
 
@@ -532,6 +541,9 @@ public class App {
                             System.out.println("Remédio do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
+                            System.out.println("----------------------------------------------------------- ");
+                            System.out.println("Pressione enter para voltar ao menu");
+                            System.out.println("----------------------------------------------------------- ");
                             break;
 
                         case 6:
@@ -554,6 +566,10 @@ public class App {
                             System.out.println("Quantidade receitada atualizada com sucesso ");
                             System.out.println("-----------------------------------------------------------");
                             System.out.println(" ");
+                            System.out.println("----------------------------------------------------------- ");
+                            System.out.println("Pressione enter para voltar ao menu");
+                            System.out.println("----------------------------------------------------------- ");
+
                             break;
                     }
 
