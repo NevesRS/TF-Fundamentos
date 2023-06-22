@@ -12,7 +12,7 @@ public class App {
 
         Paciente[] paciente = new Paciente[10];
 
-        paciente[0] = new Paciente("Bruno", "123", null, 0, null, 0);
+        paciente[0] = new Paciente("Bruno", "12345678900", null, 0, null, 0);
         paciente[1] = new Paciente("Aline", "1234", null, 0, null, 0);
 
         CadastroPaciente cadastro = new CadastroPaciente(10);
@@ -240,14 +240,16 @@ public class App {
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(
                                     "O estoque de CovidUltra possui: " + medicamento[0].getQuantidadeRemedio()
-                                            + "caixas");
+                                            + " caixas");
                             System.out.println(
-                                    "O estoque de Zicox possui: " + medicamento[1].getQuantidadeRemedio() + "caixas");
+                                    "O estoque de Zicox possui: " + medicamento[1].getQuantidadeRemedio() + " caixas");
                             System.out.println(
-                                    "O estoque de ChikTop possui: " + medicamento[2].getQuantidadeRemedio() + "caixas");
+                                    "O estoque de ChikTop possui: " + medicamento[2].getQuantidadeRemedio()
+                                            + " caixas");
                             System.out
                                     .println("O estoque de Denguenit possui: " + medicamento[3].getQuantidadeRemedio()
-                                            + "caixas");
+                                            + " caixas");
+
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Pressione enter para voltar ao menu");
                             System.out.println("----------------------------------------------------------- ");
@@ -368,13 +370,17 @@ public class App {
                     break;
 
                 case 5:
-                    int alterPaciente = 0;
+                    String alterPaciente;
+                    int alterPacienteCode = 0;
                     String cpfPaciente;
                     int cpfPacienteCode;
                     do {
                         System.out.println("Digite o CPF do paciente que você deseja alterar a ficha: ");
                         cpfPaciente = key.nextLine();
                         cpfPacienteCode = cadastro.verificacaoNumeros(cpfPaciente);
+                        if (cpfPacienteCode == 1) {
+                            System.out.println("Entrada inválida, tente novamente ");
+                        }
                     } while (cpfPacienteCode == 1 || cpfPaciente.length() != 11);
 
                     int infoCpf = cadastro.localizarPaciente(cpfPaciente);
@@ -387,17 +393,20 @@ public class App {
                             System.out.println("4 - Diagnóstico: " + paciente[infoCpf].getDiagnostico());
                             System.out.println("5 - Medicamento: " + paciente[infoCpf].getMedicamentoIndicado());
                             System.out.println("6 - Quantidade de caixas: " + paciente[infoCpf].getQuantidadeCaixas());
-                            alterPaciente = key.nextInt();
-                            key.nextLine();
-                            if (alterPaciente <= 0 || alterPaciente > 6) {
+                            alterPaciente = key.nextLine();
+                            alterPacienteCode = cadastro.tranforma(alterPaciente);
+                            if (alterPacienteCode <= 0 || alterPacienteCode > 6) {
                                 System.out.println("Número inváilido, tente novamente");
-                                System.out.println(" ");
                             }
-                        } while (alterPaciente <= 0 || alterPaciente > 6);
+                        } while (alterPacienteCode <= 0 || alterPacienteCode > 6);
                     } else {
                         System.out.println("Paciente com o cpf: " + cpfPaciente + " não foi encontrado");
+                        System.out.println("----------------------------------------------------------- ");
+                        System.out.println("Pressione enter para voltar ao menu");
+                        System.out.println("----------------------------------------------------------- ");
+
                     }
-                    switch (alterPaciente) {
+                    switch (alterPacienteCode) {
                         case 1:
                             int travaNovoNome;
                             do {
@@ -405,6 +414,9 @@ public class App {
                                 String novoNome = key.nextLine();
                                 travaNovoNome = cadastro.verificacaoLetras(novoNome);
                                 paciente[infoCpf].setNome(novoNome);
+                                if (travaNovoNome == 1) {
+                                    System.out.println("Entrada inválida, tente novamente ");
+                                }
                             } while (travaNovoNome == 1);
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Nome do paciente atualizado com sucesso ");
@@ -413,26 +425,38 @@ public class App {
 
                             break;
                         case 2:
+                            String novoCpf;
                             int travaNovoCpf;
                             do {
                                 System.out.println("Atualize o CPF do paciente: ");
-                                String novoCpf = key.nextLine();
-                                travaNovoCpf = cadastro.verificacaoLetras(novoCpf);
+                                novoCpf = key.nextLine();
+                                travaNovoCpf = cadastro.verificacaoNumeros(novoCpf);
                                 paciente[infoCpf].setCpf(novoCpf);
-                            } while (travaNovoCpf == 1);
+                                if (travaNovoCpf == 1) {
+                                    System.out.println("Entrada inválida, tente novamente ");
+                                } else if (novoCpf.length() != 11) {
+                                    System.out.println("Entrada inválida, tente novamente");
+                                }
+                            } while (travaNovoCpf == 1 || novoCpf.length() != 11);
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Cpf do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
                             break;
                         case 3:
+                            String novoTelefone;
                             int travaNovoTelefone;
                             do {
                                 System.out.println("Atualize o telefone do paciente: ");
-                                String novoTelefone = key.nextLine();
-                                travaNovoTelefone = cadastro.verificacaoLetras(novoTelefone);
+                                novoTelefone = key.nextLine();
+                                travaNovoTelefone = cadastro.verificacaoNumeros(novoTelefone);
                                 paciente[infoCpf].setTelefone(novoTelefone);
-                            } while (travaNovoTelefone == 1);
+                                if (travaNovoTelefone == 1) {
+                                    System.out.println("Entrada inválida, tente novamente ");
+                                } else if (novoTelefone.length() != 9) {
+                                    System.out.println("Entrada inválida, tente novamente");
+                                }
+                            } while (travaNovoTelefone == 1 || novoTelefone.length() != 9);
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println("Telefone do paciente atualizado com sucesso ");
                             System.out.println("----------------------------------------------------------- ");
@@ -492,14 +516,28 @@ public class App {
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(" ");
                             break;
+
                         case 6:
-                            System.out.println("Digite a nova quantidade receitada: ");
-                            int novaQuant = key.nextInt();
-                            paciente[infoCpf].setQuantidadeCaixas(novaQuant);
-                            String codigoMed = paciente[infoCpf].getMedicamentoIndicado();
-                            int codigo = cadastro.tranforma(codigoMed);
-                            medicamento[codigo - 1].setQuantidadeRemedio(
-                                    medicamento[codigo - 1].getQuantidadeRemedio() - novaQuant);
+                            String novaQuant;
+                            int travaNovaQuant;
+                            int novaQuantCode;
+                            int codigo;
+
+                            do {
+                                System.out.println("Digite a nova quantidade receitada: ");
+                                novaQuant = key.nextLine();
+                                novaQuantCode = Integer.parseInt(novaQuant);
+                                travaNovaQuant = cadastro.verificacaoNumeros(novaQuant);
+
+                                paciente[infoCpf].setQuantidadeCaixas(novaQuantCode);
+                                String codigoMed = paciente[infoCpf].getMedicamentoIndicado();
+                                codigo = cadastro.tranforma(codigoMed);
+                                medicamento[codigo - 1].setQuantidadeRemedio(
+                                        medicamento[codigo - 1].getQuantidadeRemedio() - novaQuantCode);
+                            } while (travaNovaQuant == 1
+                                    || novaQuantCode > medicamento[codigo - 1].getQuantidadeRemedio()
+                                    || novaQuantCode < 0);
+
                             System.out.println("-----------------------------------------------------------");
                             System.out.println("Quantidade receitada atualizada com sucesso ");
                             System.out.println("-----------------------------------------------------------");
