@@ -406,9 +406,30 @@ public class App {
                         System.out.println("----------------------------------------------------------- ");
 
                     }
+
+                    // Variáveis de controle
+
+                    String novoRemed;
+                    int novoRemedCode = 0;
+
+                    String novaQuant;
+                    int travaNovaQuant;
+                    int novaQuantCode;
+
+                    int travaNovoNome;
+
+                    String novoCpf;
+                    int travaNovoCpf;
+
+                    String novoTelefone;
+                    int travaNovoTelefone;
+
+                    String novoDiag;
+                    int novoDiagCode;
+
                     switch (alterPacienteCode) {
                         case 1:
-                            int travaNovoNome;
+
                             do {
                                 System.out.println("Atualize o nome do paciente: ");
                                 String novoNome = key.nextLine();
@@ -425,8 +446,7 @@ public class App {
 
                             break;
                         case 2:
-                            String novoCpf;
-                            int travaNovoCpf;
+
                             do {
                                 System.out.println("Atualize o CPF do paciente: ");
                                 novoCpf = key.nextLine();
@@ -444,8 +464,7 @@ public class App {
                             System.out.println(" ");
                             break;
                         case 3:
-                            String novoTelefone;
-                            int travaNovoTelefone;
+
                             do {
                                 System.out.println("Atualize o telefone do paciente: ");
                                 novoTelefone = key.nextLine();
@@ -463,8 +482,7 @@ public class App {
                             System.out.println(" ");
                             break;
                         case 4:
-                            String novoDiag;
-                            int novoDiagCode;
+
                             do {
                                 System.out.println("Atualize o diagnóstico do paciente: ");
                                 System.out.println("1 - Covid ");
@@ -481,8 +499,7 @@ public class App {
                             System.out.println(" ");
                             break;
                         case 5:
-                            String novoRemed;
-                            int novoRemedCode;
+
                             do {
                                 System.out.println("Atualize o remédio receitado para o paciente: ");
                                 System.out.println("Escolha o remédio que foi receitado para o paciente: ");
@@ -518,25 +535,17 @@ public class App {
                             break;
 
                         case 6:
-                            String novaQuant;
-                            int travaNovaQuant;
-                            int novaQuantCode;
-                            int codigo;
-
                             do {
                                 System.out.println("Digite a nova quantidade receitada: ");
                                 novaQuant = key.nextLine();
                                 novaQuantCode = Integer.parseInt(novaQuant);
                                 travaNovaQuant = cadastro.verificacaoNumeros(novaQuant);
-
                                 paciente[infoCpf].setQuantidadeCaixas(novaQuantCode);
-                                String codigoMed = paciente[infoCpf].getMedicamentoIndicado();
-                                codigo = cadastro.tranforma(codigoMed);
-                                medicamento[codigo - 1].setQuantidadeRemedio(
-                                        medicamento[codigo - 1].getQuantidadeRemedio() - novaQuantCode);
                             } while (travaNovaQuant == 1
-                                    || novaQuantCode > medicamento[codigo - 1].getQuantidadeRemedio()
+                                    || novaQuantCode > medicamento[novoRemedCode].getQuantidadeRemedio()
                                     || novaQuantCode < 0);
+                            medicamento[novoRemedCode].setQuantidadeRemedio(
+                                    medicamento[novoRemedCode].getQuantidadeRemedio() - novaQuantCode);
 
                             System.out.println("-----------------------------------------------------------");
                             System.out.println("Quantidade receitada atualizada com sucesso ");
