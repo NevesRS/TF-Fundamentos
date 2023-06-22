@@ -37,7 +37,7 @@ public class CadastroPaciente {
     return posicao;
   }
 
-  public int verificaLetras(String nome) {
+  public int verificacaoLetras(String nome) { // Percorre o parametro e verifica se ele tem algum número
     int aux = 1;
     for (int i = 0; i < nome.length(); i++) {
       char a = nome.charAt(i);
@@ -52,7 +52,7 @@ public class CadastroPaciente {
     return aux;
   }
 
-  public int verificaSeTemLetras(String cpf) {
+  public int verificacaoNumeros(String cpf) { // Percorre o parametro e verifica se ele tem alguma letra
     for (int i = 0; i < cpf.length(); i++) {
       char a = cpf.charAt(i);
       if (a == '1' || a == '2' || a == '3' || a == '4' || a == '5' || a == '6' || a == '7' || a == '8' || a == '9'
@@ -64,7 +64,7 @@ public class CadastroPaciente {
     return 2;
   }
 
-  public int tranforma(String valor) {
+  public int tranforma(String valor) { // Transforma uma string em int para trabalhar de maneira mais simples no main
     int aux = 0;
     switch (valor) {
       case "1":
@@ -104,13 +104,17 @@ public class CadastroPaciente {
       System.out.println("Paciente cadatrado com sucesso ");
       System.out.println("----------------------------------------------------------- ");
       System.out.println(" ");
+      System.out.println("----------------------------------------------------------- ");
+      System.out.println("Pressione enter para voltar ao menu");
+      System.out.println("----------------------------------------------------------- ");
       pacientes[index] = c;
       index++;
       return true;
     }
   }
 
-  public void removerPaciente(Paciente[] p, String cpf) {
+  public void removerPaciente(Paciente[] p, String cpf) { // Localiza o paciente passando o cpf como parâmetro e remove
+                                                          // o paciente de cpf x
     boolean existe = false;
     for (int i = 0; i < pacientes.length; i++) {
       if (pacientes[i] != null) {
@@ -133,7 +137,7 @@ public class CadastroPaciente {
   }
 
   public void alterarRemedio(int quant, Medicamento[] medicamento, int remed, String nome, String cpf, String tel,
-      int diag) {
+      int diag) { // Método para alterar o remédio receitado
     if (quant <= medicamento[remed - 1].getQuantidadeRemedio()) {
       medicamento[remed - 1]
           .setQuantidadeRemedio(medicamento[remed - 1].getQuantidadeRemedio() - quant);
@@ -143,7 +147,7 @@ public class CadastroPaciente {
     }
   }
 
-  public void organizarVetor(Paciente[] p) {
+  public void organizarVetor(Paciente[] p) { // Método para organizar o vetor, para não permitir "furos" no vetor
     Paciente[] p2 = new Paciente[p.length];
     int cont = 0;
     for (int i = 0; i < p.length; i++) {
@@ -159,25 +163,8 @@ public class CadastroPaciente {
     }
   }
 
-  public int temLetra(String texto) {
-    for (char caractere : texto.toCharArray()) {
-      if (Character.isLetter(caractere)) {
-        return 2;
-      }
-    }
-    return 1;
-  }
-
-  public int temNumero(String texto) {
-    for (char caractere : texto.toCharArray()) {
-      if (Character.isDigit(caractere)) {
-        return 2;
-      }
-    }
-    return 1;
-  }
-
-  public void porcentDoenças() {
+  public void porcentDoenças() { // Cálcula a porcentagem de doenças recebendo a quantidade de cada ocorrência da
+                                 // doença.
     int contCovid = 0;
     int contZika = 0;
     int contChikungunya = 0;
@@ -217,7 +204,7 @@ public class CadastroPaciente {
     System.out.println("");
   }
 
-  public void imprimeTodoVetor() {
+  public void imprimeTodoVetor() { // Imprime todo o vetor paciente. (Com as lacunas)
     for (int i = 0; i < pacientes.length; i++) {
       if (pacientes[i] != null) {
 
@@ -236,7 +223,7 @@ public class CadastroPaciente {
     }
   }
 
-  public void imprimeOcupado() {
+  public void imprimeOcupado() { // Imprime todo o vetor paciente. (Sem as lacunas)
     for (int i = 0; i < pacientes.length; i++) {
       if (pacientes[i] != null) {
         System.out.println("Posição: " + i);

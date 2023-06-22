@@ -25,8 +25,9 @@ public class App {
         System.out.println("Olá, pressione enter para entrar no programa");
         System.out.println("----------------------------------------------------------- ");
         do {
+            key.nextLine();
             do {
-                key.nextLine();
+
                 System.out.println("----------------------------------------------- ");
                 System.out.println("|      Seja bem-vindo ao sistema da UPA       | ");
                 System.out.println("| ------------------------------------------- | ");
@@ -49,7 +50,7 @@ public class App {
                     do {
                         System.out.println("Digite o nome do paciente que você deseja adicionar: ");
                         nome = key.nextLine();
-                        travaNome = cadastro.verificaLetras(nome);
+                        travaNome = cadastro.verificacaoLetras(nome);
                         if (travaNome == 1) {
                             System.out.println("Nome inválido, tente novamente");
                         }
@@ -60,7 +61,7 @@ public class App {
                     do {
                         System.out.println("Digite o cpf do paciente");
                         cpf = key.nextLine();
-                        travaCpf = cadastro.verificaSeTemLetras(cpf);
+                        travaCpf = cadastro.verificacaoNumeros(cpf);
                         if (travaCpf == 1) {
                             System.out.println("Cpf inválido, tente novamente");
                         } else if (cpf.length() != 11) {
@@ -74,7 +75,7 @@ public class App {
                     do {
                         System.out.println("Digite o celular do paciente");
                         tel = key.nextLine();
-                        travaTelefone = cadastro.verificaSeTemLetras(tel);
+                        travaTelefone = cadastro.verificacaoNumeros(tel);
                         if (tel.length() != 9) {
                             System.out.println("Número de celular inválido, tente novamente");
                         } else if (travaTelefone == 1) {
@@ -112,7 +113,7 @@ public class App {
                     do {
                         System.out.println("Digite a quantidade de remédio receitada para o paciente: ");
                         quant = key.nextLine();
-                        quantTrava = cadastro.verificaSeTemLetras(quant);
+                        quantTrava = cadastro.verificacaoNumeros(quant);
                         if (quantTrava != 1) {
                             quantCode = quantTrava;
                         } else {
@@ -270,7 +271,7 @@ public class App {
                                     do {
                                         System.out.println("Digite a nova quantidade de CovidUltra do estoque");
                                         covidAltera = key.nextLine();
-                                        travaCovidAltera = cadastro.verificaSeTemLetras(covidAltera);
+                                        travaCovidAltera = cadastro.verificacaoNumeros(covidAltera);
                                         medicamento[0].setQuantidadeRemedio(travaCovidAltera);
                                         if (travaCovidAltera == 1) {
                                             System.out.println("Entrada inválida, tente novamente");
@@ -294,7 +295,7 @@ public class App {
                                     do {
                                         System.out.println("Digite a nova quantidade de Zicox do estoque");
                                         zicAltera = key.nextLine();
-                                        travaZicAltera = cadastro.verificaSeTemLetras(zicAltera);
+                                        travaZicAltera = cadastro.verificacaoNumeros(zicAltera);
                                         medicamento[1].setQuantidadeRemedio(travaZicAltera);
                                         if (travaZicAltera == 1) {
                                             System.out.println("Entrada inválida, tente novamente ");
@@ -318,7 +319,7 @@ public class App {
                                     do {
                                         System.out.println("Digite a nova quantidade de ChikTop do estoque");
                                         chikAltera = key.nextLine();
-                                        travaChikAltera = cadastro.verificaLetras(chikAltera);
+                                        travaChikAltera = cadastro.verificacaoLetras(chikAltera);
                                         medicamento[2].setQuantidadeRemedio(travaChikAltera);
                                         if (travaChikAltera == 1) {
                                             System.out.println("Entrada inválida, tente novamente ");
@@ -342,7 +343,7 @@ public class App {
                                     do {
                                         System.out.println("Digite a nova quantidade de Denguenit do estoque");
                                         dengAltera = key.nextLine();
-                                        travaDengAltera = cadastro.verificaSeTemLetras(dengAltera);
+                                        travaDengAltera = cadastro.verificacaoNumeros(dengAltera);
                                         medicamento[3].setQuantidadeRemedio(travaDengAltera);
                                         if (travaDengAltera == 1) {
                                             System.out.println("Entrada inválida, tente novamente ");
@@ -373,7 +374,7 @@ public class App {
                     do {
                         System.out.println("Digite o CPF do paciente que você deseja alterar a ficha: ");
                         cpfPaciente = key.nextLine();
-                        cpfPacienteCode = cadastro.verificaSeTemLetras(cpfPaciente);
+                        cpfPacienteCode = cadastro.verificacaoNumeros(cpfPaciente);
                     } while (cpfPacienteCode == 1 || cpfPaciente.length() != 11);
 
                     int infoCpf = cadastro.localizarPaciente(cpfPaciente);
@@ -402,7 +403,7 @@ public class App {
                             do {
                                 System.out.println("Atualize o nome do paciente: ");
                                 String novoNome = key.nextLine();
-                                travaNovoNome = cadastro.verificaLetras(novoNome);
+                                travaNovoNome = cadastro.verificacaoLetras(novoNome);
                                 paciente[infoCpf].setNome(novoNome);
                             } while (travaNovoNome == 1);
                             System.out.println("----------------------------------------------------------- ");
@@ -416,7 +417,7 @@ public class App {
                             do {
                                 System.out.println("Atualize o CPF do paciente: ");
                                 String novoCpf = key.nextLine();
-                                travaNovoCpf = cadastro.verificaLetras(novoCpf);
+                                travaNovoCpf = cadastro.verificacaoLetras(novoCpf);
                                 paciente[infoCpf].setCpf(novoCpf);
                             } while (travaNovoCpf == 1);
                             System.out.println("----------------------------------------------------------- ");
@@ -429,7 +430,7 @@ public class App {
                             do {
                                 System.out.println("Atualize o telefone do paciente: ");
                                 String novoTelefone = key.nextLine();
-                                travaNovoTelefone = cadastro.verificaLetras(novoTelefone);
+                                travaNovoTelefone = cadastro.verificacaoLetras(novoTelefone);
                                 paciente[infoCpf].setTelefone(novoTelefone);
                             } while (travaNovoTelefone == 1);
                             System.out.println("----------------------------------------------------------- ");
