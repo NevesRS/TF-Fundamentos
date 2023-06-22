@@ -285,7 +285,7 @@ public class App {
                                     int travaCovidAltera;
                                     int covidAlteraInt = 0;
                                     do {
-                                        System.out.println("Digite a nova quantidade de Zicox do estoque");
+                                        System.out.println("Digite a nova quantidade de CovidUltra do estoque");
                                         covidAltera = key.nextLine();
                                         travaCovidAltera = cadastro.verificacaoLetras(covidAltera);
                                         if (travaCovidAltera == 2) {
@@ -296,7 +296,7 @@ public class App {
                                         }
                                         if (covidAlteraInt < 0) {
                                             System.out.println(
-                                                    "Quantidades de caixas de ChikTop inválida, tente novamente");
+                                                    "Quantidades de caixas de CovidUltra inválida, tente novamente");
                                         }
                                     } while (covidAlteraInt < 0 || travaCovidAltera == 2);
                                     medicamento[0].setQuantidadeRemedio(covidAlteraInt);
