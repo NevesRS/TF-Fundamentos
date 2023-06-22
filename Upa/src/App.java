@@ -414,7 +414,7 @@ public class App {
 
                     String novaQuant;
                     int travaNovaQuant;
-                    int novaQuantCode;
+                    int novaQuantCode = 0;
 
                     int travaNovoNome;
 
@@ -538,8 +538,11 @@ public class App {
                             do {
                                 System.out.println("Digite a nova quantidade receitada: ");
                                 novaQuant = key.nextLine();
-                                novaQuantCode = Integer.parseInt(novaQuant);
                                 travaNovaQuant = cadastro.verificacaoNumeros(novaQuant);
+                                if (travaNovaQuant != 1) {
+                                    novaQuantCode = Integer.parseInt(novaQuant);
+                                }
+
                                 paciente[infoCpf].setQuantidadeCaixas(novaQuantCode);
                             } while (travaNovaQuant == 1
                                     || novaQuantCode > medicamento[novoRemedCode].getQuantidadeRemedio()
