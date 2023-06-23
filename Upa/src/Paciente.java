@@ -1,4 +1,4 @@
-public class Paciente {
+public class Paciente { // Classe usada para criar os Pacientes da UPA
   private String nome;
   private String cpf;
   private String telefone;

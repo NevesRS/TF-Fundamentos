@@ -1,4 +1,4 @@
-public class Medicamento {
+public class Medicamento { // Classe usada para criar os medicamentos da UPA
   private String nomeRemedio;
   private int quantidadeRemedio;
 
