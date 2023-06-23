@@ -1,3 +1,5 @@
+LINK VÍDEO PITCH: https://youtu.be/KrCHLFqfWO0
+
 Este projeto foi desenvolvido com base nas demandas apresentadas pela professora Lúcia Giraffa para o nosso trabalho final na disciplina de Fundamentos de Programação. O objetivo principal era criar um sistema de integração para uma Unidade de Pronto Atendimento, com ênfase no registro de pacientes com doenças respiratórias. O projeto exigiu a criação de uma classe "Pacientes", a implementação de funcionalidades para cadastro de pacientes e medicamentos, além do desenvolvimento de uma aplicação.
 
 Durante o desenvolvimento deste trabalho, tivemos a oportunidade de aplicar todos os conceitos e conhecimentos adquiridos ao longo da disciplina. Utilizamos amplamente os recursos de classes, algoritmos, verificações de dados e criação de menus interativos, entre outros elementos relevantes.
