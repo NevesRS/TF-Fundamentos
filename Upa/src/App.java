@@ -44,6 +44,7 @@ public class App {
                 case 1: // Opção adicionar paciente
                     int travaNome = 1;
                     String nome = " ";
+                    char a;
                     do {
                         System.out.println("Digite o nome do paciente que você deseja adicionar: ");
                         nome = key.nextLine();
@@ -209,14 +210,14 @@ public class App {
                             int index = 0;
                             for (int i = 0; i < paciente.length; i++) {
                                 if (paciente[i] != null) {
-                                    nomes[index] = paciente[i].getNome();
+                                    nomes[index] = paciente[i].getNome().toUpperCase();
                                     index++;
                                 }
                             }
                             Arrays.sort(nomes);
                             for (int j = 0; j < nomes.length; j++) {
                                 for (int i = 0; i < paciente.length; i++) {
-                                    if (paciente[i] != null && nomes[j].equals(paciente[i].getNome())) {
+                                    if (paciente[i] != null && nomes[j].equalsIgnoreCase(paciente[i].getNome())) {
                                         Paciente temp = paciente[j];
                                         paciente[j] = paciente[i];
                                         paciente[i] = temp;
