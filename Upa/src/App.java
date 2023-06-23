@@ -1,7 +1,6 @@
 import java.util.*;
 
 public class App {
-    // teste
     public static void main(String[] args) {
         Scanner key = new Scanner(System.in);
         Medicamento[] medicamento = new Medicamento[4]; // Criando vetor de objeto da classe medicamento
@@ -11,9 +10,6 @@ public class App {
         medicamento[3] = new Medicamento("Denguenit", 15);
 
         Paciente[] paciente = new Paciente[10]; // Criando vetor de objeto da classe paciente
-
-        paciente[0] = new Paciente("Bruno", "12345678900", null, 0, null, 0);
-        paciente[1] = new Paciente("Aline", "1234", null, 0, null, 0);
 
         CadastroPaciente cadastro = new CadastroPaciente(10); // Criando objeto cadastro
         cadastro.setPacientes(paciente); // Armazenando paciente dentro do objeto cadastro
