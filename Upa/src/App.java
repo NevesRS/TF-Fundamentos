@@ -111,21 +111,24 @@ public class App {
                     String quant;
                     int quantTrava;
                     int quantCode = 0;
+                    int quantValor = 0;
                     do {
                         System.out.println("Digite a quantidade de remédio receitada para o paciente: ");
                         quant = key.nextLine();
+
                         quantTrava = cadastro.verificacaoNumeros(quant); // Tratamento de números na entrada de dados
                         if (quantTrava != 1) { // Verificação na entrada de dados
-                            quantCode = quantTrava;
+                            quantValor = Integer.parseInt(quant);
+                            ;
                         } else {
                             System.out.println("Entrada de dados inválida, tente novamente");
                         }
-                        if (quantCode > medicamento[remedioCodigo - 1].getQuantidadeRemedio() || quantCode < 0) {
+                        if (quantValor > medicamento[remedioCodigo - 1].getQuantidadeRemedio() || quantValor < 0) {
                             System.out.println("Quantidade indisponivel no estoque!");
                         } // Verificando se há a quantidade suficiente no estoque para criar o paciente
-                    } while (quantCode > medicamento[remedioCodigo - 1].getQuantidadeRemedio() || quantCode < 0
+                    } while (quantValor > medicamento[remedioCodigo - 1].getQuantidadeRemedio() || quantValor < 0
                             || quantTrava == 1);
-                    cadastro.alterarRemedio(quantCode, medicamento, remedioCodigo, nome, cpf, tel, diagnosticoCodigo);
+                    cadastro.alterarRemedio(quantValor, medicamento, remedioCodigo, nome, cpf, tel, diagnosticoCodigo);
                     // Adicionando o paciente com os dados armazenados no vetor
                     break;
 
