@@ -4,19 +4,19 @@ public class App {
     // teste
     public static void main(String[] args) {
         Scanner key = new Scanner(System.in);
-        Medicamento[] medicamento = new Medicamento[4];
-        medicamento[0] = new Medicamento("CovidUltra", 15);
+        Medicamento[] medicamento = new Medicamento[4]; // Criando vetor de objeto da classe medicamento
+        medicamento[0] = new Medicamento("CovidUltra", 15); // Colocando o nome e quantidade de medicamento em cada
         medicamento[1] = new Medicamento("Zicox", 20);
         medicamento[2] = new Medicamento("ChikTop", 15);
         medicamento[3] = new Medicamento("Denguenit", 15);
 
-        Paciente[] paciente = new Paciente[10];
+        Paciente[] paciente = new Paciente[10]; // Criando vetor de objeto da classe paciente
 
         paciente[0] = new Paciente("Bruno", "12345678900", null, 0, null, 0);
         paciente[1] = new Paciente("Aline", "1234", null, 0, null, 0);
 
-        CadastroPaciente cadastro = new CadastroPaciente(10);
-        cadastro.setPacientes(paciente);
+        CadastroPaciente cadastro = new CadastroPaciente(10); // Criando objeto cadastro
+        cadastro.setPacientes(paciente); // Armazenando paciente dentro do objeto cadastro
 
         int saida = 0;
         String opcaoPrincipal;
@@ -27,7 +27,7 @@ public class App {
         do {
             key.nextLine();
             do {
-
+                // Menu principal da UPA
                 System.out.println("----------------------------------------------- ");
                 System.out.println("|      Seja bem-vindo ao sistema da UPA       | ");
                 System.out.println("| ------------------------------------------- | ");
@@ -41,17 +41,18 @@ public class App {
                 System.out.println("----------------------------------------------- ");
                 opcaoPrincipal = key.nextLine();
                 opcaoPrincipalCode = cadastro.tranforma(opcaoPrincipal);
+                // Verificação de números na entrada de dados
             } while (opcaoPrincipalCode <= 0 || opcaoPrincipalCode > 6);
 
-            switch (opcaoPrincipalCode) {
-                case 1: // Adicionar paciente
+            switch (opcaoPrincipalCode) { // Switch principal do menu
+                case 1: // Opção adicionar paciente
                     int travaNome = 1;
                     String nome = " ";
                     do {
                         System.out.println("Digite o nome do paciente que você deseja adicionar: ");
                         nome = key.nextLine();
-                        travaNome = cadastro.verificacaoLetras(nome);
-                        if (travaNome == 1) {
+                        travaNome = cadastro.verificacaoLetras(nome); // Tratamento de letras na entrada de dados
+                        if (travaNome == 1) { // Verificação na entrada de dados
                             System.out.println("Nome inválido, tente novamente");
                         }
                     } while (travaNome == 1);
@@ -61,25 +62,28 @@ public class App {
                     do {
                         System.out.println("Digite o cpf do paciente");
                         cpf = key.nextLine();
-                        travaCpf = cadastro.verificacaoNumeros(cpf);
-                        if (travaCpf == 1) {
+                        travaCpf = cadastro.verificacaoNumeros(cpf); // Tratamento de números na entrada de dados
+                        if (cadastro.cpfRepetido(paciente, cpf) == true) { // Verifica Cpf repetido
+                            System.out.println("Esse CPF já está cadastrado!");
+                        }
+                        if (travaCpf == 1) { // Verificação na entrada de dados
                             System.out.println("Cpf inválido, tente novamente");
                         } else if (cpf.length() != 11) {
                             System.out.println(
                                     "Cpf inválido, digite apenas os números do cpf do paciente, Ex: 11122233345");
                         }
-                    } while (cpf.length() != 11 || travaCpf == 1);
+                    } while (cpf.length() != 11 || travaCpf == 1 || cadastro.cpfRepetido(paciente, cpf) == true);
 
                     int travaTelefone;
                     String tel = " ";
                     do {
                         System.out.println("Digite o celular do paciente");
                         tel = key.nextLine();
-                        travaTelefone = cadastro.verificacaoNumeros(tel);
-                        if (tel.length() != 9) {
+                        travaTelefone = cadastro.verificacaoNumeros(tel); // Tratamento de números na entrada de dados
+                        if (tel.length() != 9) { // Verificação no tamanho do telefone
+                            System.out.println("Número de celular inválido utilize o formato 911223344 ");
+                        } else if (travaTelefone == 1) { // Verificação na entrada de dados
                             System.out.println("Número de celular inválido, tente novamente");
-                        } else if (travaTelefone == 1) {
-                            System.out.println("Número de celular invá1lido utilize o formato 911223344 ");
                         }
                     } while (tel.length() != 9 || travaTelefone == 1);
 
@@ -92,7 +96,8 @@ public class App {
                         System.out.println("3 - Chikungunya ");
                         System.out.println("4 - Dengue ");
                         diagnostico = key.nextLine();
-                        diagnosticoCodigo = cadastro.tranforma(diagnostico);
+                        diagnosticoCodigo = cadastro.tranforma(diagnostico); // Tratamento de números na entrada de
+                                                                             // dados
                     } while (diagnosticoCodigo < 1 || diagnosticoCodigo > 4);
 
                     String remedio;
@@ -104,7 +109,7 @@ public class App {
                         System.out.println("3 - ChikTop (" + medicamento[2].getQuantidadeRemedio() + " em estoque)");
                         System.out.println("4 - Denguenit (" + medicamento[3].getQuantidadeRemedio() + " em estoque)");
                         remedio = key.nextLine();
-                        remedioCodigo = cadastro.tranforma(remedio);
+                        remedioCodigo = cadastro.tranforma(remedio); // Tratamento de números na entrada de dados
                     } while (remedioCodigo < 1 || remedioCodigo > 4);
 
                     String quant;
@@ -113,32 +118,40 @@ public class App {
                     do {
                         System.out.println("Digite a quantidade de remédio receitada para o paciente: ");
                         quant = key.nextLine();
-                        quantTrava = cadastro.verificacaoNumeros(quant);
-                        if (quantTrava != 1) {
+                        quantTrava = cadastro.verificacaoNumeros(quant); // Tratamento de números na entrada de dados
+                        if (quantTrava != 1) { // Verificação na entrada de dados
                             quantCode = quantTrava;
                         } else {
                             System.out.println("Entrada de dados inválida, tente novamente");
                         }
                         if (quantCode > medicamento[remedioCodigo - 1].getQuantidadeRemedio() || quantCode < 0) {
                             System.out.println("Quantidade indisponivel no estoque!");
-                        }
+                        } // Verificando se há a quantidade suficiente no estoque para criar o paciente
                     } while (quantCode > medicamento[remedioCodigo - 1].getQuantidadeRemedio() || quantCode < 0
                             || quantTrava == 1);
                     cadastro.alterarRemedio(quantCode, medicamento, remedioCodigo, nome, cpf, tel, diagnosticoCodigo);
+                    // Adicionando o paciente com os dados armazenados no vetor
                     break;
 
-                case 2: // removerPac paciente
+                case 2: // Opção remover paciente
                     String removerPac = " ";
+                    int travaRemovePac;
                     do {
                         System.out.println("Digite o cpf do paciente que você deseja remover: ");
                         removerPac = key.nextLine();
-                        if (removerPac.length() != 11) {
+                        travaRemovePac = cadastro.verificacaoNumeros(removerPac); // Tratamento de números na entrada de
+                                                                                  // dados
+                        if (travaRemovePac == 1) { // Verificação na entrada de dados
                             System.out.println(
                                     "Cpf inválido, digite apenas os números do cpf do paciente, Ex: 11122233345");
                         }
-                    } while (removerPac.length() != 11);
-                    cadastro.removerPaciente(paciente, removerPac);
-                    cadastro.organizarVetor(paciente);
+                        if (removerPac.length() != 11) { // Verificação no tamanho do Cpf
+                            System.out.println(
+                                    "Cpf inválido, digite apenas os números do cpf do paciente, Ex: 11122233345");
+                        }
+                    } while (removerPac.length() != 11 || travaRemovePac == 1);
+                    cadastro.removerPaciente(paciente, removerPac); // Remove o paciente utilizando o Cpf
+                    cadastro.organizarVetor(paciente); // Organiza o vetor para não deixar "furos"
                     System.out.println("----------------------------------------------------------- ");
                     System.out.println("Pressione enter para voltar ao menu");
                     System.out.println("----------------------------------------------------------- ");
@@ -157,10 +170,10 @@ public class App {
                         System.out.println("| 4 - Ordenar todos os pacientes em ordem alfabética:     | "); // NC
                         System.out.println("----------------------------------------------------------- ");
                         fichas = key.nextLine();
-                        menuFichas = cadastro.tranforma(fichas);
+                        menuFichas = cadastro.tranforma(fichas); // Tratamento de números na entrada de dados
                     } while (menuFichas >= 5 || menuFichas <= 0);
                     switch (menuFichas) {
-                        case 1:
+                        case 1: // Mostra apenas as posições ocupadas do vetor
                             System.out.println("Aqui está a ficha com os pacientes internados:  ");
                             System.out.println(" ");
                             cadastro.imprimeOcupado();
@@ -168,7 +181,7 @@ public class App {
                             System.out.println("Pressione enter para voltar ao menu");
                             System.out.println("----------------------------------------------------------- ");
                             break;
-                        case 2:
+                        case 2: // Mostra o vetor inteiro
                             System.out.println("Aqui está a ficha com os pacientes e os leitos ainda disponiveis: ");
                             System.out.println(" ");
                             cadastro.imprimeTodoVetor();
@@ -176,7 +189,7 @@ public class App {
                             System.out.println("Pressione enter para voltar ao menu");
                             System.out.println("----------------------------------------------------------- ");
                             break;
-                        case 3:
+                        case 3: // Mostra a porcentagem de ocorreência de cada doença na UPA
                             System.out.println("Aqui está o relatório da ocorrência das doenças no hospital: ");
                             System.out.println(" ");
                             cadastro.porcentDoenças();
@@ -184,7 +197,7 @@ public class App {
                             System.out.println("Pressione enter para voltar ao menu");
                             System.out.println("----------------------------------------------------------- ");
                             break;
-                        case 4:
+                        case 4: // Ordena os Pacientes internados em ordem alfabética
                             System.out.println("Aqui está o relatório de pacientes em ordem alfabética: ");
                             System.out.println(" ");
                             int cont = 0;
@@ -222,7 +235,7 @@ public class App {
                     }
                     break;
 
-                case 4: // Gerenciar remédios
+                case 4: // Menu de controle do estoque de remédios da UPA
                     String remedioCode;
                     int menuRemedio;
                     do {
@@ -233,10 +246,10 @@ public class App {
                         System.out.println("|  2 - Alterar o estoque:                      | ");
                         System.out.println("------------------------------------------------ ");
                         remedioCode = key.nextLine();
-                        menuRemedio = cadastro.tranforma(remedioCode);
+                        menuRemedio = cadastro.tranforma(remedioCode); // Tratamento de números na entrada de dados
                     } while (menuRemedio <= 0 || menuRemedio > 2);
                     switch (menuRemedio) {
-                        case 1: // Mostrar todo o estoque
+                        case 1: // Mostra todo o estoque de remédios
                             System.out.println("----------------------------------------------------------- ");
                             System.out.println(
                                     "O estoque de CovidUltra possui: " + medicamento[0].getQuantidadeRemedio()
@@ -254,7 +267,7 @@ public class App {
                             System.out.println("Pressione enter para voltar ao menu");
                             System.out.println("----------------------------------------------------------- ");
                             break;
-                        case 2:// Alterar estoque
+                        case 2: // Menu para alterar estoque de remédios
                             String alteraEstoqueCode;
                             int opcaoAlteraEstoque = 0;
                             do {
@@ -265,27 +278,30 @@ public class App {
                                 System.out.println("4 - Alterar estoque de Denguenit");
                                 alteraEstoqueCode = key.nextLine();
                                 opcaoAlteraEstoque = cadastro.tranforma(alteraEstoqueCode);
+                                // Tratamento de números na entrada de dados
+
                             } while (opcaoAlteraEstoque > 4 || opcaoAlteraEstoque <= 0);
                             switch (opcaoAlteraEstoque) {
-                                case 1: // Alterar quantidade de coviultra
+                                case 1: // Altera a quantidade de CovidUltra
                                     String covidAltera;
                                     int travaCovidAltera;
                                     int covidAlteraInt = 0;
                                     do {
                                         System.out.println("Digite a nova quantidade de CovidUltra do estoque");
                                         covidAltera = key.nextLine();
-                                        travaCovidAltera = cadastro.verificacaoLetras(covidAltera);
-                                        if (travaCovidAltera == 2) {
+                                        travaCovidAltera = cadastro.verificacaoNumeros(covidAltera);
+                                        // Tratamento de números na entrada de dados
+                                        if (travaCovidAltera == 1) {
                                             System.out.println("Entrada inválida, tente novamente");
                                         }
-                                        if (travaCovidAltera == 1) {
+                                        if (travaCovidAltera == 2) {
                                             covidAlteraInt = Integer.parseInt(covidAltera);
                                         }
                                         if (covidAlteraInt < 0) {
                                             System.out.println(
                                                     "Quantidades de caixas de CovidUltra inválida, tente novamente");
                                         }
-                                    } while (covidAlteraInt < 0 || travaCovidAltera == 2);
+                                    } while (covidAlteraInt < 0 || travaCovidAltera == 1);
                                     medicamento[0].setQuantidadeRemedio(covidAlteraInt);
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println("Estoque de CovidUltra atualizado");
@@ -302,18 +318,19 @@ public class App {
                                     do {
                                         System.out.println("Digite a nova quantidade de Zicox do estoque");
                                         zicAltera = key.nextLine();
-                                        travaZicAltera = cadastro.verificacaoLetras(zicAltera);
-                                        if (travaZicAltera == 2) {
+                                        travaZicAltera = cadastro.verificacaoNumeros(zicAltera);
+                                        // Tratamento de números na entrada de dados
+                                        if (travaZicAltera == 1) { // Verificação na entrada de dados
                                             System.out.println("Entrada inválida, tente novamente");
                                         }
-                                        if (travaZicAltera == 1) {
+                                        if (travaZicAltera == 2) {
                                             zicAlteraInt = Integer.parseInt(zicAltera);
                                         }
-                                        if (zicAlteraInt < 0) {
+                                        if (zicAlteraInt < 0) { // Verificação na entrada de dados
                                             System.out.println(
                                                     "Quantidades de caixas de Zicox inválida, tente novamente");
                                         }
-                                    } while (zicAlteraInt < 0 || travaZicAltera == 2);
+                                    } while (zicAlteraInt < 0 || travaZicAltera == 1);
                                     medicamento[1].setQuantidadeRemedio(zicAlteraInt);
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println("Estoque de Zicox atualizado");
@@ -330,18 +347,19 @@ public class App {
                                     do {
                                         System.out.println("Digite a nova quantidade de ChikTop do estoque");
                                         chikAltera = key.nextLine();
-                                        travaChikAltera = cadastro.verificacaoLetras(chikAltera);
-                                        if (travaChikAltera == 2) {
+                                        travaChikAltera = cadastro.verificacaoNumeros(chikAltera);
+                                        // Tratamento de números na entrada de dados
+                                        if (travaChikAltera == 1) { // Verificação na entrada de dados
                                             System.out.println("Entrada inválida, tente novamente");
                                         }
-                                        if (travaChikAltera == 1) {
+                                        if (travaChikAltera == 2) {
                                             chikAlteraInt = Integer.parseInt(chikAltera);
                                         }
-                                        if (chikAlteraInt < 0) {
+                                        if (chikAlteraInt < 0) { // Verificação na entrada de dados
                                             System.out.println(
                                                     "Quantidades de caixas de ChikTop inválida, tente novamente");
                                         }
-                                    } while (chikAlteraInt < 0 || travaChikAltera == 2);
+                                    } while (chikAlteraInt < 0 || travaChikAltera == 1);
                                     medicamento[2].setQuantidadeRemedio(chikAlteraInt);
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println("Estoque de ChikTop atualizado");
@@ -358,18 +376,19 @@ public class App {
                                     do {
                                         System.out.println("Digite a nova quantidade de Denguenit do estoque");
                                         dengAltera = key.nextLine();
-                                        travaDengAltera = cadastro.verificacaoLetras(dengAltera);
-                                        if (travaDengAltera == 2) {
+                                        travaDengAltera = cadastro.verificacaoNumeros(dengAltera);
+                                        // Tratamento de números na entrada de dados
+                                        if (travaDengAltera == 1) { // Verificação na entrada de dados
                                             System.out.println("Entrada inválida, tente novamente");
                                         }
-                                        if (travaDengAltera == 1) {
+                                        if (travaDengAltera == 2) {
                                             dengAlteraInt = Integer.parseInt(dengAltera);
                                         }
-                                        if (dengAlteraInt < 0) {
+                                        if (dengAlteraInt < 0) { // Verificação na entrada de dados
                                             System.out.println(
                                                     "Quantidades de caixas de Denguenit inválida, tente novamente");
                                         }
-                                    } while (dengAlteraInt < 0 || travaDengAltera == 2);
+                                    } while (dengAlteraInt < 0 || travaDengAltera == 1);
                                     medicamento[3].setQuantidadeRemedio(dengAlteraInt);
                                     System.out.println("----------------------------------------------------------- ");
                                     System.out.println("Estoque de Denguenit atualizado");
@@ -384,7 +403,7 @@ public class App {
                     }
                     break;
 
-                case 5:
+                case 5: // Menu para alterar informações de um paciente já cadastrado
                     String alterPaciente;
                     int alterPacienteCode = 0;
                     String cpfPaciente;
@@ -393,12 +412,14 @@ public class App {
                         System.out.println("Digite o CPF do paciente que você deseja alterar a ficha: ");
                         cpfPaciente = key.nextLine();
                         cpfPacienteCode = cadastro.verificacaoNumeros(cpfPaciente);
-                        if (cpfPacienteCode == 1) {
+                        // Tratamento de números na entrada de dados
+                        if (cpfPacienteCode == 1) { // Verificação na entrada de dados
                             System.out.println("Entrada inválida, tente novamente ");
                         }
                     } while (cpfPacienteCode == 1 || cpfPaciente.length() != 11);
 
                     int infoCpf = cadastro.localizarPaciente(cpfPaciente);
+                    // Localiza a posição do paciente pelo Cpf do mesmo
                     if (infoCpf != -1) {
                         do {
                             System.out.println("O que você deseja alterar do paciente: " + paciente[infoCpf].getNome());
@@ -410,6 +431,7 @@ public class App {
                             System.out.println("6 - Quantidade de caixas: " + paciente[infoCpf].getQuantidadeCaixas());
                             alterPaciente = key.nextLine();
                             alterPacienteCode = cadastro.tranforma(alterPaciente);
+                            // Tratamento de números na entrada de dados
                             if (alterPacienteCode <= 0 || alterPacienteCode > 6) {
                                 System.out.println("Número inváilido, tente novamente");
                             }
@@ -449,8 +471,9 @@ public class App {
                                 System.out.println("Atualize o nome do paciente: ");
                                 String novoNome = key.nextLine();
                                 travaNovoNome = cadastro.verificacaoLetras(novoNome);
+                                // Tratamento de letras na entrada de dados
                                 paciente[infoCpf].setNome(novoNome);
-                                if (travaNovoNome == 1) {
+                                if (travaNovoNome == 1) { // Verificação na entrada de dados
                                     System.out.println("Entrada inválida, tente novamente ");
                                 }
                             } while (travaNovoNome == 1);
@@ -466,10 +489,11 @@ public class App {
                                 System.out.println("Atualize o CPF do paciente: ");
                                 novoCpf = key.nextLine();
                                 travaNovoCpf = cadastro.verificacaoNumeros(novoCpf);
+                                // Tratamento de números na entrada de dados
                                 paciente[infoCpf].setCpf(novoCpf);
-                                if (travaNovoCpf == 1) {
+                                if (travaNovoCpf == 1) { // Verificação na entrada de dados
                                     System.out.println("Entrada inválida, tente novamente ");
-                                } else if (novoCpf.length() != 11) {
+                                } else if (novoCpf.length() != 11) { // Verificação no tamanho do novo Cpf
                                     System.out.println("Entrada inválida, tente novamente");
                                 }
                             } while (travaNovoCpf == 1 || novoCpf.length() != 11);
@@ -484,10 +508,11 @@ public class App {
                                 System.out.println("Atualize o telefone do paciente: ");
                                 novoTelefone = key.nextLine();
                                 travaNovoTelefone = cadastro.verificacaoNumeros(novoTelefone);
+                                // Tratamento de números na entrada de dados
                                 paciente[infoCpf].setTelefone(novoTelefone);
-                                if (travaNovoTelefone == 1) {
+                                if (travaNovoTelefone == 1) { // Verificação no tamanho do novo Cpf
                                     System.out.println("Entrada inválida, tente novamente ");
-                                } else if (novoTelefone.length() != 9) {
+                                } else if (novoTelefone.length() != 9) { // Verificação no tamanho do novo Telefone
                                     System.out.println("Entrada inválida, tente novamente");
                                 }
                             } while (travaNovoTelefone == 1 || novoTelefone.length() != 9);
@@ -497,8 +522,7 @@ public class App {
                             System.out.println(" ");
                             break;
                         case 4:
-
-                            do {
+                            do { // Menu para atualização do diagnóstico do paciente
                                 System.out.println("Atualize o diagnóstico do paciente: ");
                                 System.out.println("1 - Covid ");
                                 System.out.println("2 - Zica ");
@@ -506,6 +530,7 @@ public class App {
                                 System.out.println("4 - Dengue ");
                                 novoDiag = key.next();
                                 novoDiagCode = cadastro.tranforma(novoDiag);
+                                // Tratamento de números na entrada de dados
                                 paciente[infoCpf].setDiagnostico(novoDiagCode);
                             } while (novoDiagCode <= 0 || novoDiagCode > 4);
                             System.out.println("----------------------------------------------------------- ");
@@ -514,8 +539,7 @@ public class App {
                             System.out.println(" ");
                             break;
                         case 5:
-
-                            do {
+                            do { // Menu para atualização do remédio receitado do paciente
                                 System.out.println("Atualize o remédio receitado para o paciente: ");
                                 System.out.println("Escolha o remédio que foi receitado para o paciente: ");
                                 System.out.println(
@@ -528,6 +552,7 @@ public class App {
                                         "4 - Denguenit (" + medicamento[3].getQuantidadeRemedio() + " em estoque)");
                                 novoRemed = key.nextLine();
                                 novoRemedCode = cadastro.tranforma(novoRemed);
+                                // Tratamento de números na entrada de dados
                             } while (novoRemedCode < 0 || novoRemedCode > 4);
 
                             switch (novoRemedCode) {
@@ -554,7 +579,8 @@ public class App {
                                 System.out.println("Digite a nova quantidade receitada: ");
                                 novaQuant = key.nextLine();
                                 travaNovaQuant = cadastro.verificacaoNumeros(novaQuant);
-                                if (travaNovaQuant != 1) {
+                                // Tratamento de números na entrada de dados
+                                if (travaNovaQuant != 1) { // Verificação no tamanho do novo Telefone
                                     novaQuantCode = Integer.parseInt(novaQuant);
                                 }
 
@@ -573,13 +599,13 @@ public class App {
                     }
 
                     break;
-                case 6:
+                case 6: // Opção para encerrar o programa
                     System.out.println("----------------------------------------------------------- ");
                     System.out.println("Obrigado por utilizar nosso programa");
                     System.out.println("----------------------------------------------------------- ");
-                    saida = 6;
+                    saida = 6; // Atualiza a variável saida para 6, o que faz o loop de repetição se encerrar
             }
-        } while (saida == 0);
+        } while (saida == 0); // Controle do loop de repetição do menu principal
         key.close();
     }
 }

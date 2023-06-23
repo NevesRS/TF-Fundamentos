@@ -42,7 +42,7 @@ public class CadastroPaciente {
     for (int i = 0; i < nome.length(); i++) {
       char a = nome.charAt(i);
       if (a == '1' || a == '2' || a == '3' || a == '4' || a == '5' || a == '6' || a == '7' || a == '8' || a == '9'
-          || a == 0) {
+          || a == '0') {
         aux = 1;
         i = nome.length();
       } else {
@@ -62,6 +62,18 @@ public class CadastroPaciente {
       }
     }
     return 2;
+  }
+
+  public boolean cpfRepetido(Paciente[] p, String cpf) { // Método que verifica se tem Pacientes com Cpf repetido
+    boolean retorno = false;
+    for (int i = 0; i < pacientes.length; i++) {
+      if (pacientes[i] != null) {
+        if (pacientes[i].getCpf().equals(cpf)) {
+          retorno = true;
+        }
+      }
+    }
+    return retorno;
   }
 
   public int tranforma(String valor) { // Transforma uma string em int para trabalhar de maneira mais simples no main
